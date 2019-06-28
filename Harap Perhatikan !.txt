@@ -1,0 +1,13 @@
+Mohon untuk mengubah API Key google maps Anda sesuai program yg telah Anda daftarkan di Google Maps API 
+supaya program anda benar2 mendapat lisensi dari Google Maps.
+
+ubahlah $apikey pada :
+Folder Application/libraries/Googlemaps.php
+
+Cari : 
+var $apiKey						= 'AIzaSyAJGxbuldQVV1qodn-Ge3uSqoe7rWRg8vk'; 
+AIzaSyDbGgR7Bl-IlAcTeobZwk8fEk0u6sQRkW0 <<- Work
+AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk <<- Milik Google					
+// If you've got an API key you can use it by passing this parameter. Setup an API key here: https://code.google.com/apis/console
+
+ganti API key nya.

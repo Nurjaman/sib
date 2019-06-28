@@ -1,0 +1,17 @@
+Pencahayaan = 
+-> Backlight
+-> Frontlight
+-> LED
+-> EL Panel
+-> Nolight
+
+Posisi = 
+-> Stand Alone
+-> Bridge
+-> Attached to Building
+-> Other
+
+Orientasi = 
+-> Horizontal
+-> Vertical
+-> Other
