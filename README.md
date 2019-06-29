@@ -16,6 +16,6 @@ SIB adalah aplikasi sederhana yang dibangun dengan PHP (Framework Codeigniter 3)
 
 
 ## Contat Pembuat
-:phone:  [0896 7225 5644](https://api.whatsapp.com/send?phone=62896722556446&text=) (Mochamad Nurjaman)
+:phone:  [0896 7225 5644](https://api.whatsapp.com/send?phone=6289672255644&text=) (Mochamad Nurjaman)
 
 :envelope: nurzaman02@gmail.com
