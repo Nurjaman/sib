@@ -9,7 +9,9 @@ SIB adalah aplikasi sederhana yang dibangun dengan PHP (Framework Codeigniter 3)
     'database' =&gt; 'SIB', // Nama Database
     </code></pre>
 2. Jalankan [http://127.0.0.1/sib/](http://127.0.0.1/sib/)
-3. Administratro login (username/email : admin@admin.com pass : nurjaman)
+3. - Admin login (email : admin@sib.com pass : nurjaman)
+   - Buyer ( Penyewa ) login (email : penyewa@sib.com pass : nurjaman)
+   - Seller ( Pemilik Media ) login (email : pemilik@sib.com pass : nurjaman)
 
 ## SCREENSHOOT
 ![alt text](https://github.com/Nurjaman/sib/blob/master/public/SIB.png "Screenshoot Aplikasi SIB Sistem Informasi Billboard")
