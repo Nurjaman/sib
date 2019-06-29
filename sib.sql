@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2019 at 12:48 PM
+-- Generation Time: Jun 29, 2019 at 09:37 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.28
 
@@ -223,10 +223,13 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`userId`, `fullname`, `mobile`, `username`, `email`, `password`, `status_aktif`, `role`, `photo`) VALUES
 (1, 'Mochamad Nurjaman', '6289672255644', 'nurjaman', 'nurzaman02@gmail.com', '$2y$10$SAvFim22ptA9gHVORtIaru1dn9rhgerJlJCPxRNA02MjQaJnkxawq', 0, 'Admin', NULL),
-(2, 'Nurjaman', '089672255644', 'Admin1', 'admin@admin.com', '$2y$10$JUaLtr5STNqnwXRg7wd3O.Xx6sWf.J2HiGFTFx/923VpT1s9atK8y', 0, 'Admin', NULL),
-(3, 'Coba Tester', '0852159185', 'tester', 'testes@gmail.com', '$2y$10$JUaLtr5STNqnwXRg7wd3O.Xx6sWf.J2HiGFTFx/923VpT1s9atK8y', 1, 'Penyewa', NULL),
+(2, 'Nurjaman Admin', '089672255644', 'Admin1', 'admin@admin.com', '$2y$10$JUaLtr5STNqnwXRg7wd3O.Xx6sWf.J2HiGFTFx/923VpT1s9atK8y', 0, 'Admin', NULL),
+(3, 'Tes Penyewa', '0852159185', 'tester', 'testes@gmail.com', '$2y$10$JUaLtr5STNqnwXRg7wd3O.Xx6sWf.J2HiGFTFx/923VpT1s9atK8y', 1, 'Penyewa', NULL),
 (4, NULL, 'bisadong', 'bismillah', 'admin1@admin.com', 'nurjaman', 1, 'Penyewa', NULL),
-(5, NULL, '0893123213', 'Nurjaman', 'nurjaman@admin.com', '$2y$10$6/iaK7PS7X9xG.Jf1LB//est0/cu5frKcRafcqHymvot7R9yxexOC', 1, 'Pemilik Media', NULL);
+(5, 'Tes Pemilik Media', '0893123213', 'Nurjaman', 'nurjaman@admin.com', '$2y$10$6/iaK7PS7X9xG.Jf1LB//est0/cu5frKcRafcqHymvot7R9yxexOC', 1, 'Pemilik Media', NULL),
+(6, 'Penyewa', '089672255644', 'Penyewa', 'penyewa@sib.com', '$2y$10$IFmdxn9P7QUeRxy3OGetvugXYmi40K8scXSkQZz5Ogph0Ki5/9oDW', 1, 'Penyewa', NULL),
+(7, 'Pemilik', '089672255644', 'Pemilik Media', 'pemilik@sib.com', '$2y$10$Lf6IUE9XTc7zoZZZnwDog.XVHUwRGOeTMnM89uMWR8SIvHinMB/qe', 1, 'Pemilik Media', NULL),
+(8, 'Penyewa', '089672255644', 'Admin', 'admin@sib.com', '$2y$10$haoluNe2geor/W3PdpaqteddlgkA/hjEgqloj6uqSI4JYzSVlkQAC', 1, 'Admin', NULL);
 
 --
 -- Indexes for dumped tables
@@ -324,7 +327,7 @@ ALTER TABLE `tbl_reset_password`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `userId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
