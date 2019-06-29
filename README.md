@@ -12,7 +12,7 @@ SIB adalah aplikasi sederhana yang dibangun dengan PHP (Framework Codeigniter 3)
 3. Administratro login (username/email : admin@admin.com pass : nurjaman)
 
 ## SCREENSHOOT
-![alt text](https://github.com/Nurjaman/sib/public/SIB.png "Screenshoot Aplikasi SIB Sistem Informasi Billboard")
+![alt text](https://github.com/Nurjaman/sib/blob/master/public/SIB.png "Screenshoot Aplikasi SIB Sistem Informasi Billboard")
 
 
 ## Contat Pembuat
