@@ -60,7 +60,7 @@ class Detail extends CI_Controller
 		$this->form_validation->set_rules('id_reklame', 'id_reklame', 'trim|required');
 		$this->form_validation->set_rules('tgl_pesan', 'tgl_pesan', 'trim|required');
 		$this->form_validation->set_rules('description', 'description', 'trim|required');
-		$this->form_validation->set_rules('status', 'status', 'trim|required');
+		$this->form_validation->set_rules('status_order', 'status', 'trim|required');
 	
 		if ($this->form_validation->run() == TRUE)
 		{

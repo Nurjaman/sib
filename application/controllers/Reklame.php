@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends CI_Controller 
+class Reklame extends CI_Controller 
 {
 	public $amenities;
 
@@ -88,7 +88,7 @@ class Admin extends CI_Controller
 
 	public function reklame()
 	{
-		$config['base_url'] = site_url("admin/reklame?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
+		$config['base_url'] = site_url("reklame/reklame?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
 
 		$config['per_page'] = 10;
 		$config['total_rows'] = $this->madmin->getAllReklame(null, null, 'num');
@@ -124,6 +124,47 @@ class Admin extends CI_Controller
 		$this->load->view('admin/data-reklame', $this->data);
 	}
 
+
+	public function Datareklame()
+	{
+		$config['base_url'] = site_url("reklame/reklame?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
+
+	$where = 7;
+
+		$config['per_page'] = 10;
+		$config['total_rows'] = $this->madmin->getAllReklame(null, null, 'num');
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = "&larr; Pertama";
+		$config['first_tag_open'] = '<li class="">';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = "Terakhir &raquo";
+		$config['last_tag_open'] = '<li class="">';
+		$config['last_tag_close'] = '</li>';
+		$config['next_link'] = "Selanjutnya &rarr;";
+		$config['next_tag_open'] = '<li class="">';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_link'] = "&larr; Sebelumnya"; 
+		$config['prev_tag_open'] = '<li class="">';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a href="">';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li class="">';
+		$config['num_tag_close'] = '</li>'; 
+		$config['page_query_string'] = TRUE;
+		$config['query_string_segment'] = 'page';
+		
+		$this->pagination->initialize($config);
+		
+		
+		$this->data = array(
+			'title' => "Data Reklame",
+			'reklame' => $this->madmin->getReklameWhere($where,'reklame' ,$config['per_page'], $this->input->get('page'), 'result')
+		);
+
+		$this->load->view('admin/data-reklame', $this->data);
+	}
+
 	public function updatereklame($param = 0)
 	{
 		$this->data['title'] = "Update Reklame";
@@ -145,7 +186,7 @@ class Admin extends CI_Controller
 		if ($this->form_validation->run() == TRUE)
 		{
 			$this->madmin->updateReklame($param);
-			
+
 			redirect(current_url());
 		}
 

@@ -8,12 +8,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php elseif ($this->session->userdata("role")=="Pemilik Media") : ?>
        <?php $this->load->view('include/header_seller', $this->data); ?>
          <?php endif; ?>
-
 <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>Home</h1>
+            <h1>Seller</h1>
           </div>
 
           <div class="section-body">

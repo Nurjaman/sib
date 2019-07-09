@@ -1,10 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$this->load->view('include/header', $this->data);
-
 $amenities = @explode(', ', $reklame->amenities);
 ?>
+<?php if ($this->session->userdata("role")=="Admin") : ?>
+  <?php $this->load->view('include/header', $this->data); ?>
+  <?php elseif ($this->session->userdata("role")=="Penyewa") : ?>
+    <?php $this->load->view('include/header_buyer', $this->data); ?>
+    <?php elseif ($this->session->userdata("role")=="Pemilik Media") : ?>
+       <?php $this->load->view('include/header_seller', $this->data); ?>
+         <?php endif; ?>
+
+
 <div class="main-content">
   <section class="section">
     <div class="section-header">

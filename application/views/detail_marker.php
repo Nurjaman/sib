@@ -28,37 +28,37 @@
   <?php echo $map['js'] ?>
 </head>
 <body id="page-top">
-    <!-- Modal Login-->
-   <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-         <div class="modal-content">
-            <div class="modal-header">
+  <!-- Modal Login-->
+  <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+     <div class="modal-content">
+      <div class="modal-header">
 
-               <h5 class="modal-title" id="exampleModalLabel">SIGN IN</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-               </button>
-            </div>
-            <div class="modal-body">
-               <form action="<?php echo base_url('user/auth') ?>" method="POST" role="form">
-                  <div class="form-group">
-                     <label for="exampleInputEmail1">Email address / Username</label>
-                     <input type="text" class="form-control" id="exampleInputEmail1" name="identity" aria-describedby="emailHelp" placeholder="Enter email / Username">
-                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                  </div>
-                  <div class="form-group">
-                     <label for="exampleInputPassword1">Password</label>
-                     <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                  </div>
-                  <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                  <button type="submit" data-dismiss="modal" data-toggle="modal" data-target="#modal_register" href="#" class="btn btn-info btn-block"> Register</button>
-               </form>
+       <h5 class="modal-title" id="exampleModalLabel">SIGN IN</h5>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+     <form action="<?php echo base_url('user/auth') ?>" method="POST" role="form">
+      <div class="form-group">
+       <label for="exampleInputEmail1">Email address / Username</label>
+       <input type="text" class="form-control" id="exampleInputEmail1" name="identity" aria-describedby="emailHelp" placeholder="Enter email / Username">
+       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+     </div>
+     <div class="form-group">
+       <label for="exampleInputPassword1">Password</label>
+       <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+     </div>
+     <button type="submit" class="btn btn-primary btn-block">Submit</button>
+     <button type="submit" data-dismiss="modal" data-toggle="modal" data-target="#modal_register" href="#" class="btn btn-info btn-block"> Register</button>
+   </form>
 
-            </div>
-         </div>
-      </div>
-   </div>
-   <!-- End Modal Login -->
+ </div>
+</div>
+</div>
+</div>
+<!-- End Modal Login -->
 
 <header class="bg-primary text-white">
  <nav class="navbar navbar-expand-lg" id="mainNav">
@@ -77,16 +77,24 @@
     </li>
     
     <li class="nav-item">
-      <?php if($this->session->has_userdata('admin_login') == FALSE) : ?>
-        <a class="menu-btn" data-toggle="modal" data-target="#login" href="#"><i class="fa fa-user-circle"></i> Masuk</a>
-        <?php else : ?>
-          <a class="menu-btn" href="<?php echo base_url('admin') ?>" ><i class="fa fa-user-circle"></i> Kembali ke Admin</a>
-        <?php endif; ?>
-      </li>
-    </ul>
-  </div>
-</div>
-</nav>
+     <?php if ($this->session->userdata("role")=="Admin") : ?>
+      <a class="menu-btn" href="<?php echo base_url('admin') ?>" ><i class="fa fa-user-circle"></i> Kembali ke Dashboard</a>
+      <?php elseif ($this->session->userdata("role")=="Penyewa") : ?>
+        <a class="menu-btn" href="<?php echo base_url('buyer') ?>" ><i class="fa fa-user-circle"></i> Kembali ke Dashboard</a>
+        <?php elseif ($this->session->userdata("role")=="Pemilik Media") : ?>
+          <a class="menu-btn" href="<?php echo base_url('seller') ?>" ><i class="fa fa-user-circle"></i> Kembali ke Dashboard</a>
+          <?php elseif($this->session->userdata("role")!="Admin") : ?>
+           <a class="menu-btn" data-toggle="modal" data-target="#login" href="#"><i class="fa fa-user-circle"></i> Masuk</a>
+           <?php elseif($this->session->userdata("role")!="Penyewa") : ?>
+             <a class="menu-btn" data-toggle="modal" data-target="#login" href="#"><i class="fa fa-user-circle"></i> Masuk</a>
+             <?php elseif($this->session->userdata("role")!="Pemilik Media") : ?>
+              <a class="menu-btn" data-toggle="modal" data-target="#login" href="#"><i class="fa fa-user-circle"></i> Masuk</a>
+            <?php endif; ?>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 </header>
 
 <section class="inner-header-block">
@@ -122,7 +130,7 @@
        <table class="table">
         <tr>
          <td><b>Status</b></td>
-           <td>:</td>
+         <td>:</td>
          <td style="color:navy"><h6><?php echo $reklame->status ?><h6></td>
          </tr>
          <tr>
@@ -163,94 +171,100 @@
  
  <center><a href="<?php echo $reklame->link ?>" class="btn btn-primary btn-sm" style="align-item:center" target="_blank">Go to Website</a>
   <a href="https://maps.google.com/maps?q=<?php echo $reklame->latitude ?>%2C<?php echo $reklame->longitude ?>" class="btn btn-default btn-sm" style="align-item:center" target="_blank"><i class="far fa-route"></i> Routes</a>
-
-  <?php if($this->session->has_userdata('admin_login') == FALSE  || $reklame->status == "Tidak Tersedia") : ?>
-
-    <?php else : ?>
+  <?php if ($this->session->userdata("role")=="Admin" && $reklame->status == "Tersedia") : ?>
+   <a  data-toggle="modal" data-target="#modal_order" href="#" class="btn btn-primary btn-sm" style="align-item:center" target="_blank">Order</a>
+   <?php elseif ($this->session->userdata("role")=="Penyewa" && $reklame->status == "Tersedia") : ?>
      <a  data-toggle="modal" data-target="#modal_order" href="#" class="btn btn-primary btn-sm" style="align-item:center" target="_blank">Order</a>
-   <?php endif; ?>
+     <?php elseif ($this->session->userdata("role")=="Pemilik Media" && $reklame->status == "Tersedia") : ?>
+       <a  data-toggle="modal" data-target="#modal_order" href="#" class="btn btn-primary btn-sm" style="align-item:center" target="_blank">Order</a>
+       <?php elseif ($this->session->userdata("role")=="Admin" || $reklame->status == "Tidak Tersedia") : ?>
 
- </center>
+        <?php elseif ($this->session->userdata("role")=="Penyewa" || $reklame->status == "Tidak Tersedia") : ?>
 
- <!-- ================= ORDER ====================== -->
- <div class="modal fade" id="modal_order" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="myModalLabel">Order | Invoice</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-      </div>
-      <form class="form-horizontal" action="<?php echo base_url().'Detail/addorder'; ?>" method="post" enctype="multipart/form-data">
-        <div class="modal-body">
+          <?php elseif ($this->session->userdata("role")=="Pemilik Media"  || $reklame->status == "Tidak Tersedia") : ?>
+           <?php endif; ?>
 
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-6">
-                <input name="no_invoice" class="form-control" value="<?php echo $invoice;?>" type="text"readonly>
-              </div><div class="col-md-6">
-                <input name="tgl_pesan" class="form-control" value="<?php echo tanggal() ?>" type="text"  readonly>
+         </center>
+
+         <!-- ================= ORDER ====================== -->
+         <div class="modal fade" id="modal_order" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel">Order | Invoice</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
               </div>
-            </div>
-          </div>
+              <form class="form-horizontal" action="<?php echo base_url().'Detail/addorder'; ?>" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
 
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Rp</span>
-            </div>
-            <input type="text" class="form-control" value="<?php echo number_format($reklame->price) ?>" aria-label="Amount (to the nearest dollar)" readonly>
-            <div class="input-group-append">
-              <span class="input-group-text">/Sewa</span>
-            </div>
-          </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <input name="no_invoice" class="form-control" value="<?php echo $invoice;?>" type="text"readonly>
+                      </div><div class="col-md-6">
+                        <input name="tgl_pesan" class="form-control" value="<?php echo tanggal() ?>" type="text"  readonly>
+                      </div>
+                    </div>
+                  </div>
 
-          <div class="form-group">
-            <label class="control-label col-xs-3" >Deskripsi</label>
-            <div class="col-xs-8 ">
-              <textarea name="description" style="margin-top: 0px; margin-bottom: 0px; height: 173px;" class="form-control" value="<?php echo set_value('description') ?>" type="text" placeholder="Deskripsi isi iklan yang akan di tampilkan" required></textarea>
-              <p class="help-block"><?php echo form_error('description', '<small class="text-red">', '</small>'); ?></p>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Rp</span>
+                    </div>
+                    <input type="text" class="form-control" value="<?php echo number_format($reklame->price) ?>" aria-label="Amount (to the nearest dollar)" readonly>
+                    <div class="input-group-append">
+                      <span class="input-group-text">/Sewa</span>
+                    </div>
+                  </div>
 
-              <?php $id = $this->session->userdata('email');
-              $this->db->select('userId')
-              ->FROM('users')
-              ->where('email',$id);
-              $query = $this->db->get()->result();
-              foreach ($query as $q) {
+                  <div class="form-group">
+                    <label class="control-label col-xs-3" >Deskripsi</label>
+                    <div class="col-xs-8 ">
+                      <textarea name="description" style="margin-top: 0px; margin-bottom: 0px; height: 173px;" class="form-control" value="<?php echo set_value('description') ?>" type="text" placeholder="Deskripsi isi iklan yang akan di tampilkan" required></textarea>
+                      <p class="help-block"><?php echo form_error('description', '<small class="text-red">', '</small>'); ?></p>
+
+                      <?php $id = $this->session->userdata('email');
+                      $this->db->select('userId')
+                      ->FROM('users')
+                      ->where('email',$id);
+                      $query = $this->db->get()->result();
+                      foreach ($query as $q) {
                 # code...
-                $q->userId;
-              }
-              ?>
+                        $q->userId;
+                      }
+                      ?>
 
-              <input name="id_user" class="form-control" value="<?php echo $q->userId ?>" type="hidden" readonly>
-              <input name="id_reklame" class="form-control" value="<?php echo $reklame->ID ?>" type="hidden" readonly>
-              <input name="status" class="form-control" value="0" type="hidden" readonly>
+                      <input name="id_user" class="form-control" value="<?php echo $q->userId ?>" type="hidden" readonly>
+                      <input name="id_reklame" class="form-control" value="<?php echo $reklame->ID ?>" type="hidden" readonly>
+                      <input name="status_order" class="form-control" value="0" type="hidden" readonly>
 
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-xs-3" >Foto Sample Iklan :</label>
+                    <div class="col-xs-8 ">
+                      <input type="file" name="photo_order">
+                    </div>
+                  </div>
+
+
+                </div>
+
+                <div class="modal-footer">
+                  <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                  <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> Order</button>
+                </div>
+              </form>
             </div>
           </div>
-          <div class="form-group">
-            <label class="control-label col-xs-3" >Foto Sample Iklan :</label>
-            <div class="col-xs-8 ">
-              <input type="file" name="photo_order">
-            </div>
-          </div>
-
-
         </div>
+        <!-- ================ END ORDER =================== -->
 
-        <div class="modal-footer">
-          <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
-            <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> Order</button>
-        </div>
-      </form>
+
+
+      </div>
     </div>
   </div>
-</div>
-<!-- ================ END ORDER =================== -->
-
-
-
-</div>
-</div>
-</div>
 </section>
 
 <section class="screens-block bg-primary" id="screens">

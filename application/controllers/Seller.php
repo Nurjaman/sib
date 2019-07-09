@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends CI_Controller 
+class Seller extends CI_Controller 
 {
 	public $amenities;
 
@@ -14,7 +14,8 @@ class Admin extends CI_Controller
 
 		$this->load->helper(array('menus','text','url','cias_helper'));
 
-		if($this->session->userdata("role")!="Admin" && $this->session->userdata("role")!="Pemilik Media") {
+		if($this->session->userdata("role")!="Pemilik Media") {
+			// echo $this->session->userdata("role");
 			redirect(site_url());
 		}
 
@@ -28,10 +29,10 @@ class Admin extends CI_Controller
 	public function index()
 	{
 		$this->data = array(
-			'title' => "Home Administrator"
+			'title' => "Home Seller"
 		);	
 
-		$this->load->view('admin/main-admin', $this->data);
+		$this->load->view('seller/main-seller', $this->data);
 	}
 
 	public function logout()
@@ -44,7 +45,6 @@ class Admin extends CI_Controller
 	{	
 		$this->data['title'] = "Tambah Reklame";
 
-		$this->form_validation->set_rules('id_user', 'User ID', 'trim|required');
 		$this->form_validation->set_rules('name', 'Nama', 'trim|required');
 		$this->form_validation->set_rules('price', 'Harga', 'trim|required');
 		$this->form_validation->set_rules('latitude', 'Latitude', 'trim|required');
@@ -145,7 +145,7 @@ class Admin extends CI_Controller
 		if ($this->form_validation->run() == TRUE)
 		{
 			$this->madmin->updateReklame($param);
-			
+
 			redirect(current_url());
 		}
 
@@ -402,7 +402,6 @@ class Admin extends CI_Controller
 			'title' => "Data User",
 			'reklame' => $this->madmin->getAllUser($config['per_page'], $this->input->get('page'), 'result')
 		);
-
 
 		$this->load->view('admin/data-user', $this->data);
 	}

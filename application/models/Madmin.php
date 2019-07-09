@@ -69,6 +69,8 @@ class Madmin extends CI_Model
 		}
 
 		$object = array(
+			'id_user' => $this->input->post('id_user'),
+
 			'name' => $this->input->post('name'),
 			'price' => $this->input->post('price'),
 			'latitude' => $this->input->post('latitude'),
@@ -124,7 +126,25 @@ class Madmin extends CI_Model
 	{
 		$reklame = $this->getReklame($param);
 
-		$config['upload_path'] = dirname($_SERVER["DOCUMENT_ROOT"]).'/public/image/';
+		// $config['upload_path'] = dirname($_SERVER["DOCUMENT_ROOT"]).'/public/image/';
+		// $config['allowed_types'] = 'gif|jpg|png';
+		// $config['max_width']  = 1024*3;
+		// $config['max_height']  = 768*3;
+		
+		// $this->upload->initialize($config);
+		// $photo='';
+		// if ( ! $this->upload->do_upload('photo'))
+		// {
+		// 	$photo = $reklame->photo; 
+		// 	// $photo = ""; 
+		// 	$this->session->set_flashdata('message', $this->upload->display_errors());
+		// } else{
+		// 	$photo = $this->upload->file_name;
+		// }
+
+		//tes
+
+		$config['upload_path'] = './public/image/';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_width']  = 1024*3;
 		$config['max_height']  = 768*3;
@@ -133,11 +153,15 @@ class Madmin extends CI_Model
 
 		if ( ! $this->upload->do_upload('photo'))
 		{
-			$photo = $reklame->photo; 
+			$photo = ""; 
 			$this->session->set_flashdata('message', $this->upload->display_errors());
 		} else{
 			$photo = $this->upload->file_name;
 		}
+
+
+
+
 
 		$object = array(
 			'name' => $this->input->post('name'),
@@ -193,6 +217,30 @@ class Madmin extends CI_Model
 		if($type == 'num')
 		{
 			return $this->db->get('reklame')->num_rows();
+		} else {
+			return $this->db->get('reklame', $limit, $offset)->result();
+		}
+	}
+
+
+	public function getReklameWhere($where,$limit = 10, $offset = 0, $type = 'result')
+	{
+		
+
+
+
+		if( $this->input->get('q') != '')
+			$this->db->like('name', $this->input->get('q'));
+
+		$this->db->order_by('ID', 'desc');
+
+		if($type == 'num')
+		{
+			$this->db->select('*');
+			$this->db->from('reklame');
+			$this->db->where('id_user',$where);
+			$query = 	$this->db->get('reklame')->num_rows();
+			return $query->result();
 		} else {
 			return $this->db->get('reklame', $limit, $offset)->result();
 		}
@@ -332,12 +380,12 @@ class Madmin extends CI_Model
 		
 		$this->upload->initialize($config);
 
-		if ( ! $this->upload->do_upload('photo'))
+		if ( ! $this->upload->do_upload('photo_order'))
 		{
-			$photo = ""; 
+			$photo_order = ""; 
 			$this->session->set_flashdata('message', $this->upload->display_errors());
 		} else{
-			$photo = $this->upload->file_name;
+			$photo_order = $this->upload->file_name;
 		}
 
 		$object = array(
@@ -345,8 +393,8 @@ class Madmin extends CI_Model
 			'id_user' => $this->input->post('id_user'),
 			'id_reklame' => $this->input->post('id_reklame'),
 			'description' => $this->input->post('description'),
-			'photo' => $photo,
-			'status' => $this->input->post('status'),
+			'photo_order' => $photo_order,
+			'status_order' => $this->input->post('status_order'),
 		);
 
 			// return $object;

@@ -26,19 +26,157 @@ class M_User extends CI_Model
 		}
 	}
 
-	public function check_login ($table, $field1, $field2){
-		$this->db->select('*');
-		$this->db->from($table);
-		$this->db->where($field1);
-		$this->db->where($field2);
-		$this->db->limit(1);
-		$query = $this->db->get();
+	public function check_login ($table, $where){
+		// $this->db->select('*');
+		// $this->db->from($table);
+		// $this->db->where($field1);
+		// $this->db->where($field2);
+		// $this->db->limit(1);
+		// $query = $this->db->get();
+		// if($query->num_rows() == 0){
+		// 	return FALSE;
+		// }else{
+		// 	return $query->result();
+		// }
+		return $this->db->get_where($table,$where);
+	}
+	public function getUser($param = 0)
+	{
+		return $this->db->get_where('users', array('userId' => $param) )->row();
+	}
 
-		if($query->num_rows() == 0){
-			return FALSE;
-		}else{
-			return $query->result();
+
+	public function updateUser($param = 0)
+	{
+		$user = $this->getUser($param);
+	
+		// $config['upload_path'] = dirname($_SERVER["DOCUMENT_ROOT"]).'/public/image/data_profile';
+		$config['upload_path'] = './public/image/data_profile';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_width']  = 1024*3;
+		$config['max_height']  = 768*3;
+		
+		$this->upload->initialize($config);
+
+		if ( ! $this->upload->do_upload('photo_profile'))
+		{
+			$photo_profile = ""; 
+			$this->session->set_flashdata('message', $this->upload->display_errors());
+		} else{
+			$photo_profile = $this->upload->file_name;
 		}
+
+
+		$config2['upload_path'] = './public/image/foto_sppkp';
+		$config2['allowed_types'] = 'gif|jpg|png';
+		$config2['max_width']  = 1024*3;
+		$config2['max_height']  = 768*3;
+		
+		$this->upload->initialize($config2);
+
+		if ( ! $this->upload->do_upload('photo_sppkp'))
+		{
+			$photo_sppkp = ""; 
+			$this->session->set_flashdata('message', $this->upload->display_errors());
+		} else{
+			$photo_sppkp = $this->upload->file_name;
+		}
+
+		// if ( ! $this->upload->do_upload('photo_sppkp'))
+		// {
+		// 	$photo_sppkp = $user->photo_sppkp; 
+		// 	$this->session->set_flashdata('message', $this->upload->display_errors());
+		// } else{
+		// 	$photo_sppkp = $this->upload->photo_sppkp;
+		// }	
+
+		// if ( ! $this->upload->do_upload('photo_npwp'))
+		// {
+		// 	$photo_npwp = $user->photo_npwp; 
+		// 	$this->session->set_flashdata('message', $this->upload->display_errors());
+		// } else{
+		// 	$photo_npwp = $this->upload->photo_npwp;
+		// }	
+
+		// if ( ! $this->upload->do_upload('photo_siup'))
+		// {
+		// 	$photo_siup = $user->photo_siup; 
+		// 	$this->session->set_flashdata('message', $this->upload->display_errors());
+		// } else{
+		// 	$photo_siup = $this->upload->photo_siup;
+		// }	
+
+		if($photo_profile == null || $photo_sppkp == null){
+			$object = array(
+				'fullname' => $this->input->post('fullname'),
+				'mobile' => $this->input->post('mobile'),
+				'username' => $this->input->post('username'),
+				'email' => $this->input->post('email'),
+				'kota' => $this->input->post('kota'),
+				'kode_pos' => $this->input->post('kode_pos'),
+				'alamat' => $this->input->post('alamat'),
+				//'password' => $this->input->post('password'),
+				// 'photo_profile' => $photo_profile,
+				// 'photo_npwp' => $photo_npwp,
+				// 'photo_sppkp' => $photo_sppkp,
+				// 'photo_siup' => $photo_siup,
+
+			);
+		}else{
+			$object = array(
+				'fullname' => $this->input->post('fullname'),
+				'mobile' => $this->input->post('mobile'),
+				'username' => $this->input->post('username'),
+				'email' => $this->input->post('email'),
+				'kota' => $this->input->post('kota'),
+				'kode_pos' => $this->input->post('kode_pos'),
+				'alamat' => $this->input->post('alamat'),
+				//'password' => $this->input->post('password'),
+				'photo_profile' => $photo_profile,
+				// 'photo_npwp' => $photo_npwp,
+				'photo_sppkp' => $photo_sppkp,
+				// 'photo_siup' => $photo_siup,
+
+			);
+		}
+
+		$this->db->update('users', $object, array('userId' => $param));
+		$this->session->set_flashdata('message', "Perubahan berhasil disimpan");
+	}
+
+
+
+
+	public function getAccount()
+	{
+		$this->db->select('*');
+		$this->db->from('users');
+		// $this->db->join('users','users.userId=tbl_order.id_user');
+		// $this->db->join('reklame','reklame.ID=tbl_order.id_reklame');
+		$this->db->where($where);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function createPerusahaan()
+	{
+
+
+		$object = array(
+			'id_user' => $this->input->post('id_user'),
+			'nm_perusahaan' => $this->input->post('nm_perusahaan'),
+			'jabatan_perusahaan' => $this->input->post('jabatan_perusahaan'),
+			'direktur_perusahaan' => $this->input->post('direktur_perusahaan'),
+			'kontak_perusahaan' => $this->input->post('kontak_perusahaan'),
+			'mobile_perusahaan' => $this->input->post('mobile_perusahaan'),
+			'fax_perusahaan' => $this->input->post('fax_perusahaan'),
+			'alamat_perusahaan' => $this->input->post('alamat_perusahaan'),
+		);
+
+			// return $object;
+
+		$this->db->insert('tbl_perusahaan', $object);
+		$this->session->set_flashdata('message', "Data berhasil ditambahkan");
 	}
 
 
@@ -60,7 +198,6 @@ class M_User extends CI_Model
 		$this->db->insert('users', $object);
 		$this->session->set_flashdata('message', "Register Selesai, silahkan login");
 	}
-
 	public function getRegister($param = 0)
 	{
 

@@ -1,8 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-$this->load->view('include/header', $this->data);
 ?>
+<?php if ($this->session->userdata("role")=="Admin") : ?>
+  <?php $this->load->view('include/header', $this->data); ?>
+  <?php elseif ($this->session->userdata("role")=="Penyewa") : ?>
+    <?php $this->load->view('include/header_buyer', $this->data); ?>
+    <?php elseif ($this->session->userdata("role")=="Pemilik Media") : ?>
+       <?php $this->load->view('include/header_seller', $this->data); ?>
+         <?php endif; ?>
 
 <div class="main-content">
   <section class="section">
@@ -16,6 +21,15 @@ $this->load->view('include/header', $this->data);
         <div class="col-12">
           <div class="card">
             <div class="card-body">
+               <?php $id = $this->session->userdata('email');
+                            $this->db->select('*')
+                            ->FROM('users')
+                            ->where('email',$id);
+                            $query = $this->db->get()->result();
+                            foreach ($query as $q) : ?>
+                              <input type="text" name="id_user" class="form-control" value="<?php   echo $q->userId; ?>" placeholder="">
+                            <?php endforeach; ?>
+
              <div class="table-responsive">
             <table class="table table-striped" id="table-1">
                 <thead>

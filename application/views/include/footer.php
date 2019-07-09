@@ -75,6 +75,7 @@
     {
       $('div#modal-id').modal('show');
     }
+    
     function setMapToForm(latitude, longitude) 
     {
       $('input[name="latitude"]').val(latitude);
@@ -95,6 +96,25 @@
         $('a#btn-yes').attr('href', base_url + 'admin/deletereklame/' + ID);
       });
     });
+
+
+
+     function updateProfile(userId){
+      swal({
+        title: "Update Profl",
+        text: "Apakah anda yakin untuk mengubah data Profil ? Pastikan data anda benar.",
+        icon: "info",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willUpdate) => {
+        if (willUpdate) {
+          window.location.href = "<?php echo base_url() ?>user/updateProfile/"+userId;
+        } else {
+          swal("Anda membatalkan perubahan.");
+        }
+      });
+  }
 
      function acceptOrder(no_invoice){
       swal({

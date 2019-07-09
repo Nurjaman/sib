@@ -27,7 +27,7 @@ $this->load->view('include/header', $this->data);
                                         <button class="close" data-dismiss="alert">
                                           <span>&times;</span>
                                         </button>
-                                        <?php echo $this->session->flashdata('message'); ?>
+                                       <?php echo $this->session->flashdata('message'); ?>
                                       </div>
                                     </div>
                                     
@@ -37,21 +37,21 @@ $this->load->view('include/header', $this->data);
                         <div class="form-group row mb-4">
                           <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Lengkap : </label>
                           <div class="col-sm-12 col-md-7">
-                              <input type="text"  name="name" class="form-control" value="<?php echo $user->fullname ?>" placeholder="">
+                              <input type="text"  name="name" class="form-control" value="<?php echo $user[0]->fullname ?>" placeholder="">
                                 <p class="help-block"><?php  echo form_error('name', '<small class="text-red">', '</small>'); ?></p>
                           </div>
                         </div>
                         <div class="form-group row mb-4">
                           <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email : </label>
                           <div class="col-sm-12 col-md-7">
-                              <input type="email" name="email" class="form-control" value="<?php echo $user->email ?>" placeholder="">
+                              <input type="email" name="email" class="form-control" value="<?php echo $user[0]->email ?>" placeholder="">
                                 <p class="help-block"><?php  echo form_error('email', '<small class="text-red">', '</small>'); ?></p>
                           </div>
                         </div>
                         <div class="form-group row mb-4">
                           <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Username : </label>
                           <div class="col-sm-12 col-md-7">
-                              <input type="text" name="username" class="form-control" value="<?php echo $user->username ?>" placeholder="">
+                              <input type="text" name="username" class="form-control" value="<?php echo $user[0]->username ?>" placeholder="">
                                 <p class="help-block"><?php  echo form_error('username', '<small class="text-red">', '</small>'); ?></p>
                           </div>
                         </div>

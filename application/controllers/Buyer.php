@@ -32,7 +32,7 @@ class Buyer extends CI_Controller
 			'title' => "Home Buyer"
 		);	
 
-		$this->load->view('buyer/main-buyer', $this->data);
+		$this->load->view('Buyer/main-buyer', $this->data);
 	}
 
 	public function logout()
