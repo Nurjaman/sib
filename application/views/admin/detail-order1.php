@@ -19,7 +19,7 @@ $this->load->view('include/header', $this->data);
 
     <div class="section-body">
 
-      <form   action="<?php echo base_url() ?>admin/proses_tambah_gambar" method="POST" enctype="multipart/form-data" novalidate>
+     <form class="form-horizontal" action="<?php echo current_url(); ?>" method="post" enctype="multipart/form-data">
 
 
         <div class="row">
@@ -209,9 +209,10 @@ $this->load->view('include/header', $this->data);
 <div class="form-group row mb-4">
   <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Foto NPWP :</label>
   <div class="col-md-4">
-    <?php if($reklame[0]->photo != '') : ?>
-      <!-- <input type="text" value="<?php //echo base_url("public/image/path_order/{$reklame[0]->photo}") ?>"> -->
-      <img src="<?php echo base_url("public/image/{$reklame[0]->photo}") ?>" height="150">
+    <?php if($reklame[0]->photo_npwp != '') : ?>
+      <a class="example-image-link" href="<?php echo base_url("public/image/foto_npwp/{$reklame[0]->photo_npwp}") ?>" data-lightbox="example-set" data-title="Foto NPWP"><img  alt="Bootstrap template" src="<?php echo base_url("public/image/foto_npwp/{$reklame[0]->photo_npwp}") ?>" height="150" width="250" /> </a>
+     <?php else : ?>
+     <img src="<?php echo base_url("public/image/no_image.jpg") ?>" height="150" width="250" /> </a>
     <?php endif; ?>
   </div>
 </div>
@@ -220,9 +221,10 @@ $this->load->view('include/header', $this->data);
 <div class="form-group row mb-4">
   <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Foto SPPKP :</label>
   <div class="col-md-4">
-    <?php if($reklame[0]->photo != '') : ?>
-      <!-- <input type="text" value="<?php //echo base_url("public/image/path_order/{$reklame[0]->photo}") ?>"> -->
-      <img src="<?php echo base_url("public/image/{$reklame[0]->photo}") ?>" height="150">
+     <?php if($reklame[0]->photo_sppkp != '') : ?>
+      <a class="example-image-link" href="<?php echo base_url("public/image/foto_sppkp/{$reklame[0]->photo_sppkp}") ?>" data-lightbox="example-set" data-title="Foto SPPKP"><img  alt="Bootstrap template" src="<?php echo base_url("public/image/foto_sppkp/{$reklame[0]->photo_sppkp}") ?>" height="150" width="250" /> </a>
+     <?php else : ?>
+     <img src="<?php echo base_url("public/image/no_image.jpg") ?>" height="150" width="250" /> </a>
     <?php endif; ?>
   </div>
 </div>
@@ -232,9 +234,10 @@ $this->load->view('include/header', $this->data);
 <div class="form-group row mb-4">
   <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Foto SIUP :</label>
   <div class="col-md-4">
-    <?php if($reklame[0]->photo != '') : ?>
-      <!-- <input type="text" value="<?php //echo base_url("public/image/path_order/{$reklame[0]->photo}") ?>"> -->
-      <img src="<?php echo base_url("public/image/{$reklame[0]->photo}") ?>" height="150">
+      <?php if($reklame[0]->photo_siup != '') : ?>
+      <a class="example-image-link" href="<?php echo base_url("public/image/foto_siup/{$reklame[0]->photo_siup}") ?>" data-lightbox="example-set" data-title="Foto SIUP"><img  alt="Bootstrap template" src="<?php echo base_url("public/image/foto_siup/{$reklame[0]->photo_siup}") ?>" height="150" width="250" /> </a>
+     <?php else : ?>
+     <img src="<?php echo base_url("public/image/no_image.jpg") ?>" height="150" width="250" /> </a>
     <?php endif; ?>
   </div>
 </div>
@@ -243,11 +246,15 @@ $this->load->view('include/header', $this->data);
   <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
   <div class="col-sm-12 col-md-7">
     <?php if($reklame[0]->status_order == "0") : ?>
-     <button type="submit" class="btn btn-info btn-block" onclick="acceptOrder('<?php echo $reklame[0]->no_invoice ?>')"  style="color: green" class="fas fa-check" value="Accept">
-      <i class="fas fa-check">Accept</i></a>
+    <a type="submit" class="btn btn-info btn-block" data-toggle="modal" onclick="acceptOrder('<?php //echo $reklame[0]->no_invoice ?>')"  style="color: green" class="fas fa-check" value="Accept"><i class="fas fa-check">Accept</i></a>
+
+
+     <!--  <a title="Accept" class="btn btn-info btn-block" data-placement="right" class="btn btn-danger"  href="#myModal"  onclick="acceptOrder('<?php echo $reklame[0]->no_invoice ?>')"  style="color: white" class="fas fa-check">Accept</a> -->
       <?php else : ?>
-        <button type="submit" class="btn btn-danger btn-block" onclick="declineOrder('<?php echo $reklame[0]->no_invoice ?>')" style="color: red" value="Decline">
+        <a type="submit" class="btn btn-danger btn-block" onclick="declineOrder('<?php echo $reklame[0]->no_invoice ?>')" style="color: white" value="Decline">
          <i class="fas fa-exclamation">Decline</i></a> 
+
+         <!--  <a title="Accept" class="btn btn-info btn-block" data-placement="right" class="btn btn-danger"  href="#myModal"  onclick="acceptOrder('<?php echo $reklame[0]->no_invoice ?>')"  style="color: white" class="fas fa-check">Accept</a> -->
        <?php endif; ?>
      </div>
    </div>

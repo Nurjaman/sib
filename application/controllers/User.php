@@ -242,6 +242,8 @@ class User extends CI_Controller
 			// echo $object;
 
 			redirect(current_url());
+		}else{
+			echo "Erro1";
 		}
 
 		  //active record dengan nama edi
@@ -253,6 +255,74 @@ class User extends CI_Controller
 
 
 
+
+		$this->load->view('account1', $this->data);
+	}
+
+
+
+
+
+	public function UpadateFotoUser($param)
+	{
+		$this->data = array(
+			'title' => "Pengaturan Akun",
+			'user' => $this->M_User->getAllRegister()
+		);	
+
+		
+			$this->M_User->updateFotoUser($param);
+
+		$where = array('userId' => $param);
+		$this->data['user'] = $this->Madmin->getAllUser($where,'users');
+
+		$this->load->view('account1', $this->data);
+	}
+
+	public function UpadateFotoNpwp($param)
+	{
+		$this->data = array(
+			'title' => "Pengaturan Akun",
+			'user' => $this->M_User->getAllRegister()
+		);	
+
+		
+			$this->M_User->updateFotoNpwp($param);
+
+		$where = array('userId' => $param);
+		$this->data['user'] = $this->Madmin->getAllUser($where,'users');
+
+		$this->load->view('account1', $this->data);
+	}
+
+	public function UpadateFotoSppkp($param)
+	{
+		$this->data = array(
+			'title' => "Pengaturan Akun",
+			'user' => $this->M_User->getAllRegister()
+		);	
+
+		
+			$this->M_User->updateFotoSppkp($param);
+
+		$where = array('userId' => $param);
+		$this->data['user'] = $this->Madmin->getAllUser($where,'users');
+
+		$this->load->view('account1', $this->data);
+	}
+
+	public function UpadateFotoSiup($param)
+	{
+		$this->data = array(
+			'title' => "Pengaturan Akun",
+			'user' => $this->M_User->getAllRegister()
+		);	
+
+		
+			$this->M_User->updateFotoSiup($param);
+
+		$where = array('userId' => $param);
+		$this->data['user'] = $this->Madmin->getAllUser($where,'users');
 
 		$this->load->view('account1', $this->data);
 	}

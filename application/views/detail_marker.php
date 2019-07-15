@@ -305,29 +305,28 @@
     </button>
   </div>
   <div class="modal-body">
-   <p>Sistem Informasi Geografis ini dibangun dengan PHP (Framework Codeigniter 3), Google Maps V3 API dan Twitter bootstrap, Dibuat selain demi memenuhi tugas Mata Kuliah <i>Geographic Information System</i> diharapkan juga dapat menjadi referensi bagi agan-agan yang ingin membuat GIS</p>
    <table class="table table-striped">
     <tbody>
      <tr>
       <td>Nama Pengembang</td>
       <td width="50" class="text-center">:</td>
-      <td>Amiin Rosyid</td>
+      <td>Mochamad Nurjaman</td>
     </tr>
     <tr>
-      <td>Website</td>
+      <td>Facebook</td>
       <td width="50" class="text-center">:</td>
-      <td><a href="http://sig.amiin.site">http://sig.amiin.site</a></td>
+      <td><a href="http://Facebook.com/dmons02">http://facebook.com/dmons02</a></td>
     </tr>
 
     <tr>
       <td>Alamat</td>
       <td width="50" class="text-center">:</td>
-      <td><a href="#">Jl. Pasir Putih, Pasir Putih, Rangkui, Kota Pangkal Pinang</a></td>
+      <td><a href="#">Jl. Cihanjuang no 83A, RT/03 RW/09</a></td>
     </tr>
     <tr>
       <td>Nomor Telepon</td>
       <td width="50" class="text-center">:</td>
-      <td><a href="https://api.whatsapp.com/send?phone=628883558303&text=Halo, Amiin Rosyid, saya mau tanya-tanya mengenai SIG nya">0888-355-8303</a></td>
+      <td><a href="https://api.whatsapp.com/send?phone=6289672255644&text=Halo, Mochamad Nurjaman, saya mau tanya-tanya mengenai SIB nya">0896-7225-5644</a></td>
     </tr>
   </tbody>
 </table> 

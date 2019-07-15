@@ -555,6 +555,53 @@ class Madmin extends CI_Model
 			return $this->db->get('users', $limit, $offset)->result();
 		}
 	}
+
+	public function createUser()
+	{
+		$object = array(
+			'role' => $this->input->post('role'),
+			'username' => $this->input->post('username'),
+			'fullname' => $this->input->post('fullname'),
+			'mobile' => $this->input->post('mobile'),
+			'email' => $this->input->post('email'),
+			'password' => password_hash($this->input->post('password'),PASSWORD_DEFAULT),
+
+		);
+
+			// return $object;
+
+		$this->db->insert('users', $object);
+		$this->session->set_flashdata('message', "Register Selesai, silahkan login");
+	}
+
+	public function acceptUser($param = 0)
+	{
+		$object = array(
+			'status_aktif' => "1",
+		);
+
+		$this->db->update('users', $object, array('userId' => $param));
+		
+
+		$this->session->set_flashdata('message', "Data berhasil Accept");
+	}
+
+	public function declineUser($param = 0)
+	{
+		$object = array(
+			'status_aktif' => "0",
+		);
+
+		$this->db->update('users', $object, array('userId' => $param));
+		
+
+		$this->session->set_flashdata('message', "Data berhasil Accept");
+	}
+
+
+
+
+
 }
 
 /* End of file Madmin.php */

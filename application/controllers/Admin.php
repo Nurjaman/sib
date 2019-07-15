@@ -21,6 +21,7 @@ class Admin extends CI_Controller
 		$this->amenities = array('Full Service','Pantau CCTV','Free Pasang','Free Design','Lokasi Ramai');
 
 		$this->load->model('madmin');
+		$this->load->model('M_User');
 
 		$this->page = $this->input->get('page');
 	}
@@ -298,6 +299,32 @@ class Admin extends CI_Controller
 	*/
 	// Order
 
+
+
+	public function addOrder()
+	{	
+		$this->data['title'] = "Tambah Order";
+
+		$this->form_validation->set_rules('no_invoice', 'Nomer Inovice', 'trim|required');
+		$this->form_validation->set_rules('id_user', 'id_user', 'trim|required');
+		$this->form_validation->set_rules('id_reklame', 'id_reklame', 'trim|required');
+		$this->form_validation->set_rules('description', 'Deskripsi', 'trim|required');
+		$this->form_validation->set_rules('status_order', 'Deskripsi', 'trim|required');
+		
+		
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->madmin->createOrder();
+
+			redirect(current_url());
+		}
+		$this->data['invoice']=$this->madmin->get_no_invoice();
+		$this->load->view('admin/add-order', $this->data);
+
+	}
+
+
 	public function Order()
 	{
 		$config['base_url'] = site_url("admin/Order?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
@@ -405,6 +432,64 @@ class Admin extends CI_Controller
 
 
 		$this->load->view('admin/data-user', $this->data);
+	}
+
+
+	public function addUser()
+	{	
+		$this->data['title'] = "Tambah Order";
+
+		$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required');
+		$this->form_validation->set_rules('username', 'Username', 'trim|required');
+		$this->form_validation->set_rules('email', 'email', 'trim|required');
+		$this->form_validation->set_rules('password', 'password', 'trim|required');
+		$this->form_validation->set_rules('role', 'role', 'trim|required');
+		
+		
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->madmin->createUser();
+
+			redirect(current_url());
+		}
+		$this->load->view('admin/add-user', $this->data);
+
+	}
+
+
+	public function acceptUser($param = 0)
+	{
+		$this->madmin->acceptUser($param);
+
+		$this->session->set_flashdata('pesan',"	
+			<script type='text/javascript'>
+			swal({
+				title: 'Sukses',
+				text: 'User telah Di Accept ! ',
+				icon: 'success',
+				confirmButtonText: 'OK'
+				})
+				</script>");
+
+		redirect('admin/User');
+	}
+
+	public function declineUser($param = 0)
+	{
+		$this->madmin->declineUser($param);
+
+		$this->session->set_flashdata('pesan',"	
+			<script type='text/javascript'>
+			swal({
+				title: 'Sukses',
+				text: 'User telah Di Decline ! ',
+				icon: 'success',
+				confirmButtonText: 'OK'
+				})
+				</script>");
+
+		redirect('admin/User');
 	}
 
 

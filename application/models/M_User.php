@@ -51,35 +51,41 @@ class M_User extends CI_Model
 		$user = $this->getUser($param);
 	
 		// $config['upload_path'] = dirname($_SERVER["DOCUMENT_ROOT"]).'/public/image/data_profile';
-		$config['upload_path'] = './public/image/data_profile';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_width']  = 1024*3;
-		$config['max_height']  = 768*3;
-		
-		$this->upload->initialize($config);
 
-		if ( ! $this->upload->do_upload('photo_profile'))
-		{
-			$photo_profile = ""; 
-			$this->session->set_flashdata('message', $this->upload->display_errors());
-		} else{
-			$photo_profile = $this->upload->file_name;
+		if ($this->input->post('photo_profile')){
+			$config['upload_path'] = './public/image/data_profile';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_width']  = 1024*3;
+			$config['max_height']  = 768*3;
+			
+			$this->upload->initialize($config);
+
+			if ( ! $this->upload->do_upload('photo_profile'))
+			{
+				$photo_profile = ""; 
+				$this->session->set_flashdata('message', $this->upload->display_errors());
+			} else{
+				$photo_profile = $this->upload->file_name;
+			}
 		}
 
+		if ($this->input->post('photo_sppkp')){
+			$config2['upload_path'] = './public/image/foto_sppkp';
+			$config2['allowed_types'] = 'gif|jpg|png';
+			$config2['max_width']  = 1024*3;
+			$config2['max_height']  = 768*3;
+			
+			$this->upload->initialize($config2);
 
-		$config2['upload_path'] = './public/image/foto_sppkp';
-		$config2['allowed_types'] = 'gif|jpg|png';
-		$config2['max_width']  = 1024*3;
-		$config2['max_height']  = 768*3;
-		
-		$this->upload->initialize($config2);
-
-		if ( ! $this->upload->do_upload('photo_sppkp'))
-		{
-			$photo_sppkp = ""; 
-			$this->session->set_flashdata('message', $this->upload->display_errors());
-		} else{
-			$photo_sppkp = $this->upload->file_name;
+			if ( ! $this->upload->do_upload('photo_sppkp'))
+			{
+				$photo_sppkp = ""; 
+				$this->session->set_flashdata('message', $this->upload->display_errors());
+			} else{
+				$photo_sppkp = $this->upload->file_name;
+			}
+		}else{
+			echo "Error 2";
 		}
 
 		// if ( ! $this->upload->do_upload('photo_sppkp'))
@@ -107,6 +113,9 @@ class M_User extends CI_Model
 		// }	
 
 		if($photo_profile == null || $photo_sppkp == null){
+			if($photo_profile == null){
+
+			}
 			$object = array(
 				'fullname' => $this->input->post('fullname'),
 				'mobile' => $this->input->post('mobile'),
@@ -139,10 +148,125 @@ class M_User extends CI_Model
 
 			);
 		}
+			echo "Coba";
+		$this->db->update('users', $object, array('userId' => $param));
+		$this->session->set_flashdata('message', "Perubahan berhasil disimpan");
+	}
+
+
+
+	public function updateFotoUser($param = 0)
+	{
+		$user = $this->getUser($param);
+	
+		$config['upload_path'] = './public/image/foto_user';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_width']  = 1024*3;
+		$config['max_height']  = 768*3;
+		
+		$this->upload->initialize($config);
+
+		if ( ! $this->upload->do_upload('photo_profile'))
+		{
+			$photo_profile = ""; 
+			$this->session->set_flashdata('message', $this->upload->display_errors());
+		} else{
+			$photo_profile = $this->upload->file_name;
+		}
+
+			$object = array(
+				'photo_profile' => $photo_profile,
+			);
+		
 
 		$this->db->update('users', $object, array('userId' => $param));
 		$this->session->set_flashdata('message', "Perubahan berhasil disimpan");
 	}
+
+	public function updateFotoNpwp($param = 0)
+	{
+		$user = $this->getUser($param);
+	
+		$config['upload_path'] = './public/image/foto_npwp';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_width']  = 1024*3;
+		$config['max_height']  = 768*3;
+		
+		$this->upload->initialize($config);
+
+		if ( ! $this->upload->do_upload('photo_npwp'))
+		{
+			$photo_npwp = ""; 
+			$this->session->set_flashdata('message', $this->upload->display_errors());
+		} else{
+			$photo_npwp = $this->upload->file_name;
+		}
+
+			$object = array(
+				'photo_npwp' => $photo_npwp,
+			);
+		
+
+		$this->db->update('users', $object, array('userId' => $param));
+		$this->session->set_flashdata('message', "Perubahan berhasil disimpan");
+	}
+
+	public function updateFotoSppkp($param = 0)
+	{
+		$user = $this->getUser($param);
+	
+		$config['upload_path'] = './public/image/foto_sppkp';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_width']  = 1024*3;
+		$config['max_height']  = 768*3;
+		
+		$this->upload->initialize($config);
+
+		if ( ! $this->upload->do_upload('photo_sppkp'))
+		{
+			$photo_sppkp = ""; 
+			$this->session->set_flashdata('message', $this->upload->display_errors());
+		} else{
+			$photo_sppkp = $this->upload->file_name;
+		}
+
+			$object = array(
+				'photo_sppkp' => $photo_sppkp,
+			);
+		
+
+		$this->db->update('users', $object, array('userId' => $param));
+		$this->session->set_flashdata('message', "Perubahan berhasil disimpan");
+	}
+
+	public function updateFotoSiup($param = 0)
+	{
+		$user = $this->getUser($param);
+	
+		$config['upload_path'] = './public/image/foto_siup';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_width']  = 1024*3;
+		$config['max_height']  = 768*3;
+		
+		$this->upload->initialize($config);
+
+		if ( ! $this->upload->do_upload('photo_siup'))
+		{
+			$photo_siup = ""; 
+			$this->session->set_flashdata('message', $this->upload->display_errors());
+		} else{
+			$photo_siup = $this->upload->file_name;
+		}
+
+			$object = array(
+				'photo_siup' => $photo_siup,
+			);
+		
+
+		$this->db->update('users', $object, array('userId' => $param));
+		$this->session->set_flashdata('message', "Perubahan berhasil disimpan");
+	}
+
 
 
 

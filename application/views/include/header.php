@@ -100,11 +100,11 @@
                 <li class="<?php echo active_link_method('addreklame', 'admin') ?>">
                   <a href="<?php echo base_url('admin/addreklame') ?>" class="nav-link  "><i class="fas fa-plus"></i><span>Tambah Reklame</span></a>
                 </li>
-                <li class="<?php echo active_link_method('addreklame', 'admin') ?>">
-                  <a href="<?php echo base_url('admin/addreklame') ?>" class="nav-link  "><i class="fas fa-plus"></i><span>Tambah Pemesanan</span></a>
+                <li class="<?php echo active_link_method('addOrder', 'admin') ?>">
+                  <a href="<?php echo base_url('admin/AddOrder') ?>" class="nav-link  "><i class="fas fa-plus"></i><span>Tambah Pemesanan</span></a>
                 </li>
-                <li class="<?php echo active_link_method('addreklame', 'admin') ?>">
-                  <a href="<?php echo base_url('admin/addreklame') ?>" class="nav-link  "><i class="fas fa-plus"></i><span>Tambah User</span></a>
+                <li class="<?php echo active_link_method('adduser', 'admin') ?>">
+                  <a href="<?php echo base_url('admin/adduser') ?>" class="nav-link  "><i class="fas fa-plus"></i><span>Tambah User</span></a>
                 </li>
                 <li class="<?php echo active_link_method('addperusahaan', 'user') ?>">
                   <a href="<?php echo base_url('user/addPerusahaan') ?>" class="nav-link  "><i class="fas fa-plus"></i><span>Tambah Perusahaan</span></a>

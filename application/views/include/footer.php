@@ -116,6 +116,42 @@
       });
   }
 
+
+
+     function acceptUser(userId){
+      swal({
+        title: "Update Status",
+        text: "jika iya maka User dapat Order Reklame",
+        icon: "info",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willUpdate) => {
+        if (willUpdate) {
+          window.location.href = "<?php echo base_url() ?>admin/acceptUser/"+userId;
+        } else {
+          swal("Anda tidak jadi Accept User ini !");
+        }
+      });
+  }
+
+   function declineUser(userId){
+      swal({
+        title: "Update Status",
+        text: "Jika iya maka User tidak dapat Pesan Reklame",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willUpdate) => {
+        if (willUpdate) {
+          window.location.href = "<?php echo base_url() ?>admin/declineUser/"+userId;
+        } else {
+          swal("Anda tidak jadi Decline User ini !");
+        }
+      });
+  }
+
      function acceptOrder(no_invoice){
       swal({
         title: "Update Status",

@@ -339,6 +339,53 @@ class Reklame extends CI_Controller
 	*/
 	// Order
 
+
+	public function addOrder()
+	{	
+		$this->data['title'] = "Tambah Reklame";
+
+		$this->form_validation->set_rules('no_invoice', 'Nomer Inovice', 'trim|required');
+		$this->form_validation->set_rules('name', 'Nama', 'trim|required');
+		$this->form_validation->set_rules('price', 'Harga', 'trim|required');
+		$this->form_validation->set_rules('latitude', 'Latitude', 'trim|required');
+		$this->form_validation->set_rules('longitude', 'Longitude', 'trim|required');
+		$this->form_validation->set_rules('description', 'Deskripsi', 'trim|required');
+
+		$this->form_validation->set_rules('jenis_media', 'Jenis_Media', 'trim|required');
+		$this->form_validation->set_rules('orientasi', 'Orientasi', 'trim|required');
+		$this->form_validation->set_rules('ukuran', 'Ukuran', 'trim|required');
+		$this->form_validation->set_rules('lighting', 'Lighting', 'trim|required');
+		$this->form_validation->set_rules('position', 'position', 'trim|required');
+
+		$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
+		$this->form_validation->set_rules('link', 'Link', 'trim|required');
+		
+		
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->madmin->createReklame();
+
+			redirect(current_url());
+		}
+
+		$config['map_div_id'] = "map-add";
+		$config['map_height'] = "250px";
+		$config['center'] = '-6.8736073,107.5564327';
+		$config['zoom'] = '12';
+		$config['map_height'] = '300px;';
+		$this->googlemaps->initialize($config);
+
+		$marker = array();
+		$marker['position'] = '-6.8736073,107.5564327';
+		$marker['draggable'] = true;
+		$marker['ondragend'] = 'setMapToForm(event.latLng.lat(), event.latLng.lng());';
+		$this->googlemaps->add_marker($marker);
+		$this->data['map'] = $this->googlemaps->create_map();
+
+		$this->load->view('admin/add-reklame', $this->data);
+	}
+
 	public function Order()
 	{
 		$config['base_url'] = site_url("admin/Order?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
