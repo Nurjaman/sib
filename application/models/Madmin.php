@@ -222,6 +222,24 @@ class Madmin extends CI_Model
 		}
 	}
 
+	public function getWhereReklame($limit = 10, $offset = 0, $type = 'result', $id_user)
+	{
+		if( $this->input->get('q') != '')
+			$this->db->like('name', $this->input->get('q'));
+
+		$this->db->order_by('ID', 'desc');
+
+		if($type == 'num')
+		{
+			return $this->db->get('reklame')->num_rows();
+
+		} else {
+			
+			$this->db->where('id_user', $id_user);
+			return $this->db->get('reklame', $limit, $offset)->result();
+		}
+	}
+
 
 	public function getReklameWhere($where,$limit = 10, $offset = 0, $type = 'result')
 	{
@@ -597,6 +615,18 @@ class Madmin extends CI_Model
 
 		$this->session->set_flashdata('message', "Data berhasil Accept");
 	}
+
+
+	public function printReklame($where,$table)
+	{
+		return $this->db->get_where($table,$where);
+	}
+	
+	public function printReklameById($where,$table)
+	{
+		return $this->db->get_where($table,$where);
+	}
+	
 
 
 

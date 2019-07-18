@@ -56,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No Invoice</label>
                       <div class="col-sm-12 col-md-7">
-                       <input name="status_order" class="form-control" value="0" type="text"readonly>
+                       <input name="status_order" class="form-control" value="0" type="hidden" readonly>
                        <input name="no_invoice" class="form-control" value="<?php echo $invoice;?>" type="text"readonly>
                      </div>
                    </div>

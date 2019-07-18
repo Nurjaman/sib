@@ -13,10 +13,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <section class="section">
       <div class="section-header">
         <h1>Data Pemesanan</h1>
-
       </div>
-
       <div class="section-body">
+         <h2 class="section-title">Sistem Informasi Billboard</h2>
+
+      <p class="section-lead">Isi data perusahaan bila Anda mewakili sebuah perusahaan atau isi dengan nama Anda bila <i>tidak mewakili perusahaan</i>.
+        <p>
+    <a href="<?php echo base_url('R_Order') ?>" target="_blank">
+    <button type="submit" class="btn btn-lg btn-default pull-right" ><i class="fa fa-print" style="color:red"></i> Print to PDF</button></a>
+
         <div class="row">
           <div class="col-12">
             <div class="card">

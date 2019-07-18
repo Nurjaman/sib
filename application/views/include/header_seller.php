@@ -61,17 +61,17 @@
               $this->db->select('*')
               ->FROM('users')
               ->where('email',$id);
-              $query = $this->db->get()->result();
-              foreach ($query as $q) : 
+              $q = $this->db->get()->result(); 
+                
                 ?>
 
             <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-              <img alt="image" src="<?php echo base_url("public/image/foto_user/{$q->photo_profile}") ?>" class="rounded-circle mr-1">
-              <div class="d-sm  -none d-lg-inline-block">Hi,<?php  echo $q->fullname; ?>
+              <img alt="image" src="<?php echo base_url("public/image/foto_user/{$q[0]->photo_profile}") ?>" class="rounded-circle mr-1">
+              <div class="d-sm  -none d-lg-inline-block">Hi,<?php  echo $q[0]->fullname; ?>
   </div></a>
                 <div class="dropdown-menu dropdown-menu-right">
 
-                  <a href="<?php echo base_url('user/updateUser1/'.$q->userId  ) ?>" class="dropdown-item has-icon">
+                  <a href="<?php echo base_url('user/updateUser1/'.$q[0]->userId  ) ?>" class="dropdown-item has-icon">
                     <i class="fas fa-cog"></i> Settings
                   </a>
                   <div class="dropdown-divider"></div>
@@ -108,7 +108,7 @@
             
                 <li class="menu-header">Pengaturan</li>
 
-                <li class="<?php echo active_link_method('updateuser1', 'user') ?>"><a class="nav-link" href="<?php echo base_url('user/updateuser1/'.$q->userId  ) ?>"><i class="fas fa-cog"></i> <span>Pengaturan Akun</span></a></li>
+                <li class="<?php echo active_link_method('updateuser1', 'user') ?>"><a class="nav-link" href="<?php echo base_url('user/updateuser1/'.$q[0]->userId  ) ?>"><i class="fas fa-cog"></i> <span>Pengaturan Akun</span></a></li>
 
                 
 
@@ -116,6 +116,6 @@
                 <li class=""><a href="<?php echo base_url('user/signout') ?>" class="nav-link" ><i class="fas fa-sign-out-alt"></i> <span>Keluar</span></a></li>             
 
               </ul>
-            <?php endforeach; ?>
+            <?php //ndforeach; ?>
           </aside>
         </div>

@@ -1,7 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-$this->load->view('include/header', $this->data);
 ?>
 <?php if ($this->session->userdata("role")=="Admin") : ?>
   <?php $this->load->view('include/header', $this->data); ?>

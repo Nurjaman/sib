@@ -89,10 +89,13 @@ class Admin extends CI_Controller
 
 	public function reklame()
 	{
+
+		$id_user = $this->session->userdata('userId');
+
 		$config['base_url'] = site_url("admin/reklame?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
 
 		$config['per_page'] = 10;
-		$config['total_rows'] = $this->madmin->getAllReklame(null, null, 'num');
+		$config['total_rows'] = $this->madmin->getWhereReklame(null, null, 'num', $id_user);
 		$config['full_tag_open'] = '<ul class="pagination">';
 		$config['full_tag_close'] = '</ul>';
 		$config['first_link'] = "&larr; Pertama";
@@ -117,9 +120,10 @@ class Admin extends CI_Controller
 		$this->pagination->initialize($config);
 		
 		
+
 		$this->data = array(
 			'title' => "Data Reklame",
-			'reklame' => $this->madmin->getAllReklame($config['per_page'], $this->input->get('page'), 'result')
+			'reklame' => $this->madmin->getWhereReklame($config['per_page'], $this->input->get('page'), 'result', $id_user)
 		);
 
 		$this->load->view('admin/data-reklame', $this->data);
@@ -490,6 +494,24 @@ class Admin extends CI_Controller
 				</script>");
 
 		redirect('admin/User');
+	}
+
+
+	public function printReklame($id)
+	{
+		$where = array('ID'=> $id);
+		$data['reklame'] = $this->madmin->printReklame($where,'reklame')->result();
+		// print_r($data);
+
+		$this->load->view('cetak/cetakreklame.php',$data);
+	}
+	public function printReklameById($id)
+	{
+		$where = array('id_user'=> $id);
+		$data['reklame'] = $this->madmin->printReklame($where,'reklame')->result();
+		// print_r($data);
+
+		$this->load->view('cetak/cetakreklame.php',$data);
 	}
 
 
