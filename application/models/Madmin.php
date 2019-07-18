@@ -621,11 +621,37 @@ class Madmin extends CI_Model
 	{
 		return $this->db->get_where($table,$where);
 	}
-	
+
 	public function printReklameById($where,$table)
 	{
 		return $this->db->get_where($table,$where);
 	}
+
+
+	public function cariKategoriReklame($where)
+	{
+		$this ->db->select('*');
+		$this->db->from('reklame');
+		$this->db->where('jenis_media',$where);
+		$query = $this->db->get();
+		return $query;
+	}	
+
+	// public function cariKategoriReklame($nama, $kategori, $harga)
+	// {
+	// 	// $where[(
+	// 	// 	'name' => $nama,
+	// 	// 	'jenis_media' => $kategori,
+	// 	// 	'price' => $harga 
+	// 	// )];
+	// 	$this ->db->select('*');
+	// 	$this->db->from('reklame');
+	// 	$this->db->where('name',$nama);
+	// 	$this->db->where('jenis_media',$kategori);
+	// 	$this->db->where('price',$harga);
+	// 	$query = $this->db->get();
+	// 	return $query;
+	// }	
 	
 
 

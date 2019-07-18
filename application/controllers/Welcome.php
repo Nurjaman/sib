@@ -3,10 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller 
 {
+
+
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->library(array('googlemaps','session'));
+
+		$this->load->model('madmin');
 	}
 
 	public function index()
@@ -76,11 +80,8 @@ class Welcome extends CI_Controller
 public function searchQuery()
 {
 	$this->db->select('reklame.*,  categories.name as category');
-
 	$this->db->join('reklamecategories', 'reklame.ID = reklameCategories.category_id' ,'left');
-
 	$this->db->join('categories', 'reklameCategories.category_id = categories.category_id','left' );
-
 	switch ($this->input->get('price')) 
 	{
 		case '<25000000':
@@ -103,7 +104,7 @@ public function searchQuery()
 		// 	$this->db->where_in('reklameCategories.category_id', $this->input->post('categories'));
 
 	if(is_array(@$this->input->get('categories')))
-		$this->db->where_in('reklamecategories.category_id',$this->input->post('categories'));
+		$this->db->where_in('reklame.jenis_media',$this->input->get('categories'));
 
 	$this->db->group_by('reklame.ID');
 
@@ -115,4 +116,21 @@ public function searchQuery()
 
 	return $this->db->get("reklame")->result();
 }
+
+	public function cariReklamehasil(){
+
+		// $harga = $this->input->get('price');
+		// $nama = $this->input->get('q');
+		$kategori = $this->input->post('categories');
+		$hasil;
+		foreach ($kategori as $value) {
+			# code...
+			$result = $this->madmin->cariKategoriReklame($value)->result();
+			// print_r($result);
+			// $result;
+		}
+
+	}
+
+
 }

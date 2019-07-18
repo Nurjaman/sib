@@ -505,10 +505,11 @@ class Admin extends CI_Controller
 
 		$this->load->view('cetak/cetakreklame.php',$data);
 	}
+	
 	public function printReklameById($id)
 	{
 		$where = array('id_user'=> $id);
-		$data['reklame'] = $this->madmin->printReklame($where,'reklame')->result();
+		$data['reklame'] = $this->madmin->printReklameById($where,'reklame')->result();
 		// print_r($data);
 
 		$this->load->view('cetak/cetakreklame.php',$data);

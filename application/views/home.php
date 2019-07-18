@@ -167,7 +167,6 @@
   <div class="" >
    <div class="row">
     <div class="col-md-3">
-
      <form action="" method="get" style="margin:10px;">
       <div class="control-group form-group">
        <div class="controls">
@@ -182,13 +181,18 @@
       <label>Kategori :</label><br>
       <?php foreach($this->db->get('categories')->result() as $key => $row) : ?>
       <div class="checkbox checkbox-info">
-        <input type="checkbox" value="<?php echo $row->name; ?>" name="categories[<?php echo $key ?>]" <?php if((int)@in_array($row->category_id, $this->input->get('categories')) AND @is_array($this->input->get('categories'))) echo 'checked'; ?>>
+        <input type="checkbox" value="<?php echo $row->name; ?>" name="categories[<?php echo $key ?>]" <?php if((int)@in_array($row->category_id, $this->input->get('categories')) AND @is_array($this->input->get('categories'))) echo 'checked'; ?>
         <label> <?php echo $row->name; ?></label>
       </div>
     <?php endforeach; ?>
   </div>
 </div>
 <?php endif; ?>
+
+
+
+
+
 
 <div class="control-group form-group">
   <div class="controls">
