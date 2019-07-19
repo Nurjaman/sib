@@ -51,7 +51,12 @@
    </div>
    <button type="submit" class="btn btn-primary btn-block">Submit</button>
    <button type="submit" data-dismiss="modal" data-toggle="modal" data-target="#modal_register" href="#" class="btn btn-info btn-block"> Register</button>
+
+   <br>
+   <!-- <a data-dismiss="modal" data-toggle="modal" data-target="#modal_lupas" href="#" >Lupa password </a> -->
+   <a href="<?php echo base_url().'user/reset_password_email'; ?>" >Lupa password </a>
  </form>
+
 
 </div>
 </div>
@@ -123,6 +128,39 @@
 </div>
 </div>
 <!-- End Modal Register -->
+
+
+
+
+<!-- Modal Lupa Password -->
+<div class="modal fade" id="modal_lupas" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+  <div class="modal-dialog">
+   <div class="modal-content">
+    <div class="modal-header">
+     <h3 class="modal-title" id="myModalLabel">Register</h3>
+     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+   </div>
+   <form class="form-horizontal" action="<?php echo base_url().'user/email_reset_password_validation'; ?>" method="post" enctype="multipart/form-data">
+     <div class="modal-body">
+      <div class="input-group mb-3">
+       <div class="input-group-prepend">
+        <span class="input-group-text">Email   </span>
+      </div>
+      <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo set_value('email') ?>" name="email" aria-describedby="emailHelp" placeholder="Email">
+      <p class="help-block"><?php  echo form_error('Email', '<small class="text-red">', '</small>'); ?></p>
+    </div>
+
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+      <button type="submit" class="btn btn-info"><i class="fa fa-save"></i>Reset Password</button>
+    </div>
+</form>
+</div>
+</div>
+</div>
+<!-- End Modal Lupa Password -->
+
 
 
 <header class="bg-primary text-white">

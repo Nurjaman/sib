@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2019 at 12:24 AM
+-- Generation Time: Jul 19, 2019 at 09:03 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.28
 
@@ -105,7 +105,7 @@ INSERT INTO `reklame` (`ID`, `id_user`, `name`, `price`, `latitude`, `longitude`
 (6, 8, 'PT. Reklame Iklan', 75000000, '-6.873948155025596', '107.51523396953121', 'Alamat lengkap woow', 'Screenshot_4.png', 'Full Service', 'Deskripsi', 'Billboard', 'Vertical', '4 x 10 Meter', 'Frontlight', 'Bridge', 'http://facebook.com/dmons02', 'Tersedia'),
 (7, 7, 'CEK KE LIMA 6', 5000000, '-6.869176162427446', '107.50768086894527', 'adsadsada', 'SIB.png', 'Full Service, Pantau CCTV', 'wqeqwewqeweqweqw', 'Neon Sign', 'Vertical', '4 x 10 Meter', 'Frontlight', 'Bridge', 'http://facebook.com/dmons02', 'Tersedia'),
 (8, 7, 'Coba', 100000, '-6.8736073', '107.53772212578122', 'Cimahi', '', 'Full Service', 'Tes', 'Billboard', 'Horizontal', '4 x 10 Meter', 'LED', 'Bridge', 'http://facebook.com/dmons02', 'Tersedia'),
-(9, 8, 'cecep', 5000000, '-6.9536073', '107.5566327', 'uciedb', 'Screenshot_41.png', 'Full Service', 'cjbk', 'Neon Sign', 'Vertical', '4 x 10 Meter', 'Stand Alone', 'Frontlight', 'jbnj', 'Tersedia');
+(9, 8, 'cecep', 500000000000000000, '-6.9536073', '107.5566327', 'uciedb', 'Screenshot_41.png', 'Full Service', 'cjbk', 'Neon Sign', 'Vertical', '4 x 10 Meter', 'Stand Alone', 'Frontlight', 'jbnj', 'Tersedia');
 
 -- --------------------------------------------------------
 
@@ -225,6 +225,7 @@ CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
   `email` varchar(128) NOT NULL COMMENT 'login email',
   `password` varchar(128) NOT NULL COMMENT 'hashed login password',
+  `reset_password` varchar(128) NOT NULL,
   `status_aktif` int(1) DEFAULT '1',
   `role` varchar(50) NOT NULL,
   `photo_profile` varchar(250) DEFAULT NULL,
@@ -239,18 +240,18 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userId`, `fullname`, `kota`, `kode_pos`, `alamat`, `mobile`, `username`, `email`, `password`, `status_aktif`, `role`, `photo_profile`, `photo_npwp`, `photo_sppkp`, `photo_siup`, `created_at`, `updated_at`) VALUES
-(1, 'ini pertama', 'Coba', 'dasdasd', 'asdasda', 'asdasda', 'asdqwqw', '', '$2y$10$SAvFim22ptA9gHVORtIaru1dn9rhgerJlJCPxRNA02MjQaJnkxawq', 0, 'Admin', NULL, '', '', '', '2019-07-01 20:12:43', NULL),
-(2, NULL, NULL, '', '', NULL, '', '', '$2y$10$JUaLtr5STNqnwXRg7wd3O.Xx6sWf.J2HiGFTFx/923VpT1s9atK8y', 0, 'Admin', NULL, '', '', '', '2019-07-01 20:12:43', NULL),
-(3, 'Tes Penyewa', '', '', '', '0852159185', 'tester', 'testes@gmail.com', '$2y$10$JUaLtr5STNqnwXRg7wd3O.Xx6sWf.J2HiGFTFx/923VpT1s9atK8y', 1, 'Penyewa', NULL, '', '', '', '2019-07-01 20:12:43', NULL),
-(4, NULL, '', '', '', 'bisadong', 'bismillah', 'admin1@admin.com', 'nurjaman', 1, 'Penyewa', NULL, '', '', '', '2019-07-01 20:12:43', NULL),
-(5, 'Tes Pemilik Media', '', '', '', '0893123213', 'Nurjaman', 'nurjaman@admin.com', '$2y$10$6/iaK7PS7X9xG.Jf1LB//est0/cu5frKcRafcqHymvot7R9yxexOC', 1, 'Pemilik Media', NULL, '', '', '', '2019-07-01 20:12:43', NULL),
-(6, 'Penyewa', '', '', '', '089672255644', 'Penyewa', 'penyewa@sib.com', '$2y$10$IFmdxn9P7QUeRxy3OGetvugXYmi40K8scXSkQZz5Ogph0Ki5/9oDW', 1, 'Penyewa', 'visi_dan_misi6.jpg', '', '', '', '2019-07-01 20:12:43', NULL),
-(7, 'Pemilik', '', '', '', '089672255644', 'Pemilik Media', 'pemilik@sib.com', '$2y$10$Lf6IUE9XTc7zoZZZnwDog.XVHUwRGOeTMnM89uMWR8SIvHinMB/qe', 1, 'Pemilik Media', 'Screenshot_10.png', 'bikin-ngiler-ini-gaji-magang-di-perusahaan-teknologi-raksasa1.png', 'Cimindi.png', '', '2019-07-01 20:12:43', NULL),
-(8, 'Admin Coba 12356', 'Cimahi 123', '40513', 'Test Admin                                                                               ', '089672255644', 'admin02', 'admin@sib.com', '$2y$10$Lf6IUE9XTc7zoZZZnwDog.XVHUwRGOeTMnM89uMWR8SIvHinMB/qe', 1, 'Admin', NULL, NULL, NULL, NULL, '2019-07-01 20:12:43', NULL),
-(9, 'Syam Ardy', 'uyuyu', '', '                    ', '0896723173615', 'Syam', 'syam@sib.com', '$2y$10$WyzToYpuHgvxn.v3V6cD.OzC3y0698CRZRU94CijoMymEx7LLUeOq', 1, 'Admin', 'bikin-ngiler-ini-gaji-magang-di-perusahaan-teknologi-raksasa.png', 'Cimindi6.png', 'program-1-magang1.png', 'Virtual-internship-1024x6829.png', '2019-07-10 11:24:36', NULL),
-(10, NULL, NULL, '', '', NULL, 'das', 'nurjaman@sib.com', '$2y$10$ncH3KPwoXINEugi7y6zVCuCfkoobGz3Mj2ryv0ZfKrWWxjuDMrXQa', 1, 'Admin', NULL, NULL, NULL, NULL, '2019-07-15 19:35:34', NULL),
-(11, 'Admin Coba', NULL, '', '', '628957129381', 'tes', 'tes@sib.com', '$2y$10$6j8agPznWL9XHIxFJVGDi.6PRvdMJyz5Gl.h72AHiaADL6Co4dC0S', 1, 'Pemilik Media', NULL, NULL, NULL, NULL, '2019-07-15 19:38:18', NULL);
+INSERT INTO `users` (`userId`, `fullname`, `kota`, `kode_pos`, `alamat`, `mobile`, `username`, `email`, `password`, `reset_password`, `status_aktif`, `role`, `photo_profile`, `photo_npwp`, `photo_sppkp`, `photo_siup`, `created_at`, `updated_at`) VALUES
+(1, 'ini pertama', 'Coba', 'dasdasd', 'asdasda', 'asdasda', 'asdqwqw', '', '$2y$10$SAvFim22ptA9gHVORtIaru1dn9rhgerJlJCPxRNA02MjQaJnkxawq', '', 0, 'Admin', NULL, '', '', '', '2019-07-01 20:12:43', NULL),
+(2, NULL, NULL, '', '', NULL, '', '', '$2y$10$JUaLtr5STNqnwXRg7wd3O.Xx6sWf.J2HiGFTFx/923VpT1s9atK8y', '', 0, 'Admin', NULL, '', '', '', '2019-07-01 20:12:43', NULL),
+(3, 'Tes Penyewa', '', '', '', '0852159185', 'tester', 'testes@gmail.com', '$2y$10$JUaLtr5STNqnwXRg7wd3O.Xx6sWf.J2HiGFTFx/923VpT1s9atK8y', '', 1, 'Penyewa', NULL, '', '', '', '2019-07-01 20:12:43', NULL),
+(4, NULL, '', '', '', 'bisadong', 'bismillah', 'admin1@admin.com', 'nurjaman', '', 1, 'Penyewa', NULL, '', '', '', '2019-07-01 20:12:43', NULL),
+(5, 'Tes Pemilik Media', '', '', '', '0893123213', 'Nurjaman', 'nurjaman@admin.com', '$2y$10$6/iaK7PS7X9xG.Jf1LB//est0/cu5frKcRafcqHymvot7R9yxexOC', '', 1, 'Pemilik Media', NULL, '', '', '', '2019-07-01 20:12:43', NULL),
+(6, 'Penyewa', '', '', '', '089672255644', 'Penyewa', 'penyewa@sib.com', '$2y$10$IFmdxn9P7QUeRxy3OGetvugXYmi40K8scXSkQZz5Ogph0Ki5/9oDW', '', 1, 'Penyewa', 'visi_dan_misi6.jpg', '', '', '', '2019-07-01 20:12:43', NULL),
+(7, 'Pemilik', '', '', '', '089672255644', 'Pemilik Media', 'pemilik@sib.com', '$2y$10$Lf6IUE9XTc7zoZZZnwDog.XVHUwRGOeTMnM89uMWR8SIvHinMB/qe', '', 1, 'Pemilik Media', 'Screenshot_10.png', 'bikin-ngiler-ini-gaji-magang-di-perusahaan-teknologi-raksasa1.png', 'Cimindi.png', '', '2019-07-01 20:12:43', NULL),
+(8, 'Admin Coba 12356', 'Cimahi 123', '40513', 'Test Admin                                                                               ', '089672255644', 'admin02', 'admin@sib.com', '$2y$10$Lf6IUE9XTc7zoZZZnwDog.XVHUwRGOeTMnM89uMWR8SIvHinMB/qe', '', 1, 'Admin', NULL, NULL, NULL, NULL, '2019-07-01 20:12:43', NULL),
+(9, 'Syam Ardy', 'uyuyu', '', '                    ', '0896723173615', 'Syam', 'syam@sib.com', '$2y$10$WyzToYpuHgvxn.v3V6cD.OzC3y0698CRZRU94CijoMymEx7LLUeOq', '', 1, 'Admin', 'bikin-ngiler-ini-gaji-magang-di-perusahaan-teknologi-raksasa.png', 'Cimindi6.png', 'program-1-magang1.png', 'Virtual-internship-1024x6829.png', '2019-07-10 11:24:36', NULL),
+(10, NULL, NULL, '', '', NULL, 'das', 'nurjaman@sib.com', '$2y$10$ncH3KPwoXINEugi7y6zVCuCfkoobGz3Mj2ryv0ZfKrWWxjuDMrXQa', '', 1, 'Admin', NULL, NULL, NULL, NULL, '2019-07-15 19:35:34', NULL),
+(11, 'Admin Coba', NULL, '', '', '628957129381', 'tes', 'nurzaman02@gmail.com', '$2y$10$hEVXYSDmQDrDTO6dReujC.aTesPcfiFxnu0bXCTp.j9uuypqeVyjW', 'zNkx9LaslhuZj3pJ4M5giTQE7crRCyUYSPOen0Vbf8BWqdXFwD', 1, 'Pemilik Media', NULL, NULL, NULL, NULL, '2019-07-15 19:38:18', NULL);
 
 --
 -- Indexes for dumped tables

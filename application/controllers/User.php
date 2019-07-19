@@ -271,7 +271,7 @@ class User extends CI_Controller
 		);	
 
 		
-			$this->M_User->updateFotoUser($param);
+		$this->M_User->updateFotoUser($param);
 
 		$where = array('userId' => $param);
 		$this->data['user'] = $this->Madmin->getAllUser($where,'users');
@@ -287,7 +287,7 @@ class User extends CI_Controller
 		);	
 
 		
-			$this->M_User->updateFotoNpwp($param);
+		$this->M_User->updateFotoNpwp($param);
 
 		$where = array('userId' => $param);
 		$this->data['user'] = $this->Madmin->getAllUser($where,'users');
@@ -303,7 +303,7 @@ class User extends CI_Controller
 		);	
 
 		
-			$this->M_User->updateFotoSppkp($param);
+		$this->M_User->updateFotoSppkp($param);
 
 		$where = array('userId' => $param);
 		$this->data['user'] = $this->Madmin->getAllUser($where,'users');
@@ -319,7 +319,7 @@ class User extends CI_Controller
 		);	
 
 		
-			$this->M_User->updateFotoSiup($param);
+		$this->M_User->updateFotoSiup($param);
 
 		$where = array('userId' => $param);
 		$this->data['user'] = $this->Madmin->getAllUser($where,'users');
@@ -448,6 +448,124 @@ class User extends CI_Controller
 
     	$this->load->view('admin/update-reklame', $this->data);
     }
+
+    public function reset_password_email()
+	{
+		$this->load->view('reset_password_email');
+	}
+
+    // public function reset_password_validation(){
+    // 	$this->form_validation->set_rules('email','Email','required|valid_email|trim');
+    // 	if($this->form_validation->run()){
+    // 		$email = $this->input->post('email');
+    // 		$reset_key = random_string('alnum',50);
+
+    // 		if($this->M_User->update_reset_key($email,$reset_key))
+    // 		{
+    // 			var_dump("Ada");
+    // 		}else{
+    // 			var_dump("Error");
+    // 		}
+    // 	}else{
+    // 		echo 0;
+    // 		// redirect('Welcome');
+    // 		$this->load->view('reset_password');
+    // 	}
+    // }
+
+
+    public function email_reset_password_validation(){
+    	$this->form_validation->set_rules('email', 'Email', 'required|valid_email|trim');
+    	if($this->form_validation->run()){
+
+    		$email = $this->input->post('email');
+    		$reset_key =  random_string('alnum', 50);
+
+    		if($this->M_User->update_reset_key($email,$reset_key))
+    		{
+
+    			$this->load->library('email');
+    			$config = array();
+    			$config['charset'] = 'utf-8';
+    			$config['useragent'] = 'Codeigniter';
+    			$config['protocol']= "smtp";
+    			$config['mailtype']= "html";
+				$config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
+				$config['smtp_port']= "465";
+				$config['smtp_timeout']= "5";
+				$config['smtp_user']= "nurzaman089672255644@gmail.com"; // isi dengan email kamu
+				$config['smtp_pass']= "nurjaman123"; // isi dengan password kamu
+				$config['crlf']="\r\n"; 
+				$config['newline']="\r\n"; 
+				$config['wordwrap'] = TRUE;
+				//memanggil library email dan set konfigurasi untuk pengiriman email
+
+				$this->email->initialize($config);
+				//konfigurasi pengiriman
+				$this->email->from($config['smtp_user']);
+				$this->email->to($this->input->post('email'));
+				$this->email->subject("Reset your password");
+
+				$message = "<p>Anda melakukan permintaan reset password</p>";
+				$message .= "<a href='".site_url('user/reset_password/'.$reset_key)."'>klik reset password</a>";
+				$this->email->message($message);
+				
+				if($this->email->send())
+				{
+					echo "silahkan cek email <b>".$this->input->post('email').'</b> untuk melakukan reset password';
+				}else
+				{
+					echo "Berhasil melakukan registrasi, gagal mengirim verifikasi email";
+				}
+				
+				echo "<br><br><a href='".site_url("member-login")."'>Kembali ke Menu Login</a>";
+
+			}else {
+				die("Email yang anda masukan belum terdaftar");
+			}
+		} else{
+			$this->load->view('reset_password');
+			// redirect('Welcome');
+
+		}
+	}
+
+	public function reset_password()
+	{
+		$reset_key = $this->uri->segment(3);
+		
+		if(!$reset_key){
+			die('Jangan Dihapus');
+		}
+
+		if($this->M_User->check_reset_key($reset_key) == 1)
+		{
+			$this->load->view('reset_password');
+		} else{
+			die("reset key salah");
+		}
+	}
+
+	public function reset_password_validation(){
+		$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|matches[retype_password]');
+		$this->form_validation->set_rules('retype_password', 'Retype Password', 'required|min_length[6]|matches[password]');
+
+		if($this->form_validation->run())
+		{
+
+			$reset_key = $this->input->post('reset_key');
+			$password = password_hash($this->input->post('password'),PASSWORD_DEFAULT);
+
+			if($this->M_User->reset_password($reset_key, $password)){
+				echo "Password anda telah berhasil diubah";
+			}else{
+				echo "error";
+			}
+		
+		}else{
+			$this->load->view('reset_password');
+		}
+	}
 
 
 
