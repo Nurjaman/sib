@@ -63,6 +63,10 @@
   <script src="<?php echo base_url() ?>public/admin/js/scripts.js"></script>
   <script src="<?php echo base_url() ?>public/admin/js/custom.js"></script>
 
+
+  <!-- Chart JS -->
+  
+
   <?php 
          if($this->session->flashdata('pesan')<>''){
              echo $this->session->flashdata('pesan'); 

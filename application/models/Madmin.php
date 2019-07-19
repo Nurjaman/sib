@@ -652,6 +652,79 @@ class Madmin extends CI_Model
 	// 	$query = $this->db->get();
 	// 	return $query;
 	// }	
+
+
+	//get data pemesanan
+
+	public function getDataPemesananJanuari(){
+
+		$query = $this->db->query("select * from tbl_order WHERE tbl_order.status_order = '1' AND MONTH(tanggal) = '1'" );
+		return $query;
+	}
+
+	public function getDataPemesananFebruari(){
+
+		$query = $this->db->query("select * from tbl_order WHERE tbl_order.status_order = '1' AND MONTH(tanggal) = '2'" );
+		return $query;
+	}
+
+	public function getDataPemesananMaret(){
+
+		$query = $this->db->query("select * from tbl_order WHERE tbl_order.status_order = '1' AND MONTH(tanggal) = '3'" );
+		return $query;
+	}
+
+	public function getDataPemesananApril(){
+
+		$query = $this->db->query("select * from tbl_order WHERE tbl_order.status_order = '1' AND MONTH(tanggal) = '4'" );
+		return $query;
+	}
+
+	public function getDataPemesananMei(){
+
+		$query = $this->db->query("select * from tbl_order WHERE tbl_order.status_order = '1' AND MONTH(tanggal) = '5'" );
+		return $query;
+	}
+
+	public function getDataPemesananJuni(){
+
+		$query = $this->db->query("select * from tbl_order WHERE tbl_order.status_order = '1' AND MONTH(tanggal) = '6'" );
+		return $query;
+	}
+
+	public function getDataPemesananJuli(){
+
+		$query = $this->db->query("select * from tbl_order WHERE tbl_order.status_order = '1' AND MONTH(tanggal) = '7'" );
+		return $query;
+	}
+
+	public function getDataPemesananAgustus(){
+
+		$query = $this->db->query("select * from tbl_order WHERE tbl_order.status_order = '1' AND MONTH(tanggal) = '8'" );
+		return $query;
+	}
+
+	public function getDataPemesananSeptember(){
+
+		$query = $this->db->query("select * from tbl_order WHERE tbl_order.status_order = '1' AND MONTH(tanggal) = '9'" );
+		return $query;
+	}
+
+	public function getDataPemesananOktober(){
+
+		$query = $this->db->query("select * from tbl_order WHERE tbl_order.status_order = '1' AND MONTH(tanggal) = '10'" );
+		return $query;
+	}
+	public function getDataPemesananNovember(){
+
+		$query = $this->db->query("select * from tbl_order WHERE tbl_order.status_order = '1' AND MONTH(tanggal) = '11'" );
+		return $query;
+	}
+		public function getDataPemesananDesember(){
+
+		$query = $this->db->query("select * from tbl_order WHERE tbl_order.status_order = '1' AND MONTH(tanggal) = '12'" );
+		return $query;
+	}
 	
 
 

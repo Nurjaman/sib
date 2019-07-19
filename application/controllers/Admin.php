@@ -28,8 +28,57 @@ class Admin extends CI_Controller
 
 	public function index()
 	{
+		$dataJanuari = $this->madmin->getDataPemesananJanuari()->result();
+		$resultJanuari = count($dataJanuari);
+		// ---
+		$dataFebruari = $this->madmin->getDataPemesananFebruari()->result();
+		$resultFebruari = count($dataFebruari);
+		// ---
+		$dataMaret = $this->madmin->getDataPemesananMaret()->result();
+		$resultMaret = count($dataMaret);
+		// ---
+		$dataApril = $this->madmin->getDataPemesananApril()->result();
+		$resultApril = count($dataApril);
+		// ---
+		$dataMei = $this->madmin->getDataPemesananMei()->result();
+		$resultMei = count($dataMei);
+		// ----
+		$dataJuni = $this->madmin->getDataPemesananJuni()->result();
+		$resultJuni = count($dataJuni);
+		// -----
+		$dataJuli = $this->madmin->getDataPemesananJuli()->result();
+		$resultJuli = count($dataJuli);
+		// -----
+		$dataAgustus = $this->madmin->getDataPemesananAgustus()->result();
+		$resultAgustus = count($dataAgustus);
+		// ----
+		$dataSeptember = $this->madmin->getDataPemesananSeptember()->result();
+		$resultSeptember= count($dataSeptember);
+		// ----
+		$dataOktober = $this->madmin->getDataPemesananOktober()->result();
+		$resultOktober = count($dataOktober);
+		// ----
+		$dataNovember = $this->madmin->getDataPemesananNovember()->result();
+		$resultNovember = count($dataNovember);
+		// ----
+		$dataDesember = $this->madmin->getDataPemesananDesember()->result();
+		$resultDesember = count($dataDesember);
+
+
 		$this->data = array(
-			'title' => "Home Administrator"
+			'title' => "Home Administrator",
+			'dataJanuari' => $resultJanuari,
+			'dataFebruari' => $resultFebruari,
+			'dataMaret' => $resultMaret,
+			'dataApril' => $resultApril,
+			'dataMei' => $resultMei,
+			'dataJuni' => $resultJuni,
+			'dataJuli' => $resultJuli,
+			'dataAgustus' => $resultAgustus,
+			'dataSeptember' => $resultSeptember,
+			'dataOktober' => $resultOktober,
+			'dataNovember' => $resultNovember,
+			'dataDesember' => $resultDesember,
 		);	
 
 		$this->load->view('admin/main-admin', $this->data);
