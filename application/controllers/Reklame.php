@@ -14,7 +14,7 @@ class Reklame extends CI_Controller
 
 		$this->load->helper(array('menus','text','url','cias_helper'));
 
-		if($this->session->userdata("role")!="Admin" && $this->session->userdata("role")!="Pemilik Media") {
+		if($this->session->userdata("role")!="Admin" && $this->session->userdata("role")!="Pemilik Media" && $this->session->userdata("role")!="Penyewa") {
 			redirect(site_url());
 		}
 
@@ -88,10 +88,13 @@ class Reklame extends CI_Controller
 
 	public function reklame()
 	{
-		$config['base_url'] = site_url("reklame/reklame?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
+
+		$id_user = $this->session->userdata('userId');
+
+		$config['base_url'] = site_url("admin/reklame?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
 
 		$config['per_page'] = 10;
-		$config['total_rows'] = $this->madmin->getAllReklame(null, null, 'num');
+		$config['total_rows'] = $this->madmin->getWhereReklame(null, null, 'num', $id_user);
 		$config['full_tag_open'] = '<ul class="pagination">';
 		$config['full_tag_close'] = '</ul>';
 		$config['first_link'] = "&larr; Pertama";
@@ -116,9 +119,10 @@ class Reklame extends CI_Controller
 		$this->pagination->initialize($config);
 		
 		
+
 		$this->data = array(
 			'title' => "Data Reklame",
-			'reklame' => $this->madmin->getAllReklame($config['per_page'], $this->input->get('page'), 'result')
+			'reklame' => $this->madmin->getWherereklame($config['per_page'], $this->input->get('page'), 'result', $id_user)
 		);
 
 		$this->load->view('admin/data-reklame', $this->data);
@@ -129,7 +133,7 @@ class Reklame extends CI_Controller
 	{
 		$config['base_url'] = site_url("reklame/reklame?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
 
-	$where = 7;
+		$where = 7;
 
 		$config['per_page'] = 10;
 		$config['total_rows'] = $this->madmin->getAllReklame(null, null, 'num');
@@ -388,10 +392,13 @@ class Reklame extends CI_Controller
 
 	public function Order()
 	{
-		$config['base_url'] = site_url("admin/Order?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
+
+		$id_user = $this->session->userdata('userId');
+
+		$config['base_url'] = site_url("reklame/Order?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
 
 		$config['per_page'] = 10;
-		$config['total_rows'] = $this->madmin->getAllOrder(null, null, 'num');
+		$config['total_rows'] = $this->madmin->getWhereOrder(null, null, 'num', $id_user);
 		$config['full_tag_open'] = '<ul class="pagination">';
 		$config['full_tag_close'] = '</ul>';
 		$config['first_link'] = "&larr; Pertama";
@@ -416,9 +423,10 @@ class Reklame extends CI_Controller
 		$this->pagination->initialize($config);
 		
 		
+
 		$this->data = array(
-			'title' => "Data Order",
-			'order' => $this->madmin->getAllOrder($config['per_page'], $this->input->get('page'), 'result')
+			'title' => "Data Reklame",
+			'order' => $this->madmin->getWhereOrder($config['per_page'], $this->input->get('page'), 'result', $id_user)
 		);
 
 		$this->load->view('admin/data-order', $this->data);
@@ -494,6 +502,117 @@ class Reklame extends CI_Controller
 
 		$this->load->view('admin/data-user', $this->data);
 	}
+
+
+	// Data Perusahaan
+	public function addPerusahaan()
+	{	
+		$this->data['title'] = "Tambah Perusahaan";
+
+		$this->form_validation->set_rules('id_user', 'id', 'trim|required');
+		$this->form_validation->set_rules('nm_perusahaan', 'Nama', 'trim|required');
+		$this->form_validation->set_rules('jabatan_perusahaan', 'Jabatan', 'trim|required');
+		$this->form_validation->set_rules('direktur_perusahaan', 'Nama Direktur', 'trim|required');
+		$this->form_validation->set_rules('kontak_perusahaan', 'Nama Kontak Perusahaan', 'trim|required');
+		$this->form_validation->set_rules('mobile_perusahaan', 'Nomor Perusahaan', 'trim|required');
+
+		$this->form_validation->set_rules('fax_perusahaan', 'Fax', 'trim|required');
+		$this->form_validation->set_rules('alamat_perusahaan', 'Orientasi', 'trim|required');
+
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->madmin->createPerusahaan();
+
+			redirect(current_url());
+		}
+
+		$this->load->view('buyer/add-perusahaan', $this->data);
+	}
+
+
+
+	public function Perusahaan()
+	{
+
+		$id_user = $this->session->userdata('userId');
+
+		$config['base_url'] = site_url("reklame/Perusahaan?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
+
+		$config['per_page'] = 10;
+		$config['total_rows'] = $this->madmin->getWherePerusahaan(null, null, 'num', $id_user);
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = "&larr; Pertama";
+		$config['first_tag_open'] = '<li class="">';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = "Terakhir &raquo";
+		$config['last_tag_open'] = '<li class="">';
+		$config['last_tag_close'] = '</li>';
+		$config['next_link'] = "Selanjutnya &rarr;";
+		$config['next_tag_open'] = '<li class="">';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_link'] = "&larr; Sebelumnya"; 
+		$config['prev_tag_open'] = '<li class="">';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a href="">';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li class="">';
+		$config['num_tag_close'] = '</li>'; 
+		$config['page_query_string'] = TRUE;
+		$config['query_string_segment'] = 'page';
+		
+		$this->pagination->initialize($config);
+		
+		
+
+		$this->data = array(
+			'title' => "Data Reklame",
+			'perusahaan' => $this->madmin->getWherePerusahaan($config['per_page'], $this->input->get('page'), 'result', $id_user)
+		);
+
+		$this->load->view('admin/data-perusahaan', $this->data);
+	}
+
+
+	public function updatePerusahaan($param)
+	{
+		$this->data['title'] = "Update Perusahaan";
+
+		$this->form_validation->set_rules('nm_perusahaan', 'Nama perusahaan', 'trim|required');
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->madmin->updatePerusahaan($param);
+			// echo $object;
+
+			redirect(current_url());
+		}
+
+		  //active record dengan nama edi
+		$where = array('id_perusahaan' => $param);
+
+		$this->data['perusahaan'] = $this->madmin->getAllPerusahaan($where,'users');
+		$this->load->view('admin/detail-perusahaan', $this->data);
+	}
+
+	public function deleteperusahaan($param = 0)
+	{
+		$this->madmin->deleteperusahaan($param);
+
+		$this->session->set_flashdata('pesan',"	
+			<script type='text/javascript'>
+			swal({
+				title: 'Sukses',
+				text: 'Data Perusahaan telah dihapus ! ',
+				icon: 'success',
+				confirmButtonText: 'OK'
+				})
+				</script>");
+
+		redirect('reklame/perusahaan');
+	}
+
 
 
 

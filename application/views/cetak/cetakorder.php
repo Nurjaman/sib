@@ -40,12 +40,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th class="text-center">Nama</th>
-                    <th class="text-center">Harga</th>
-                    <th class="text-center">Alamat</th>
-                    <th class="text-center">Fasilitas</th>
-                    <th class="text-center">Deskripsi</th>
-                    <th class="text-center">Photo</th>
+                    <th class="text-center">Nomor Invoice</th>
+                    <th class="text-center">Deskripsina</th>
+                    <th class="text-center">Status Order</th>
+                    <th class="text-center">Tanggal Pemesanan</th>
+                    <th class="text-center">Photo Pengajuan Iklan</th>
 
                   </tr>
                 </thead>
@@ -53,15 +52,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <?php foreach( $reklame as $row) : ?>
                     <tr>
                       <td><?php echo ++$this->page ?>.</td>
-                      <td class="td-action" width="250">
-                        <?php echo $row->name ?>
+                      <td class="td-action" width="100">
+                        <?php echo $row->no_invoice ?>
                       </td>
-                      <td><?php echo number_format($row->price) ?></td>
-                      <td width="200"><small><?php echo word_limiter($row->address, 15) ?></small></td>
-                      <td width="150"><small><?php echo $row->amenities ?></small></td>
-                      <td width="200"><small><?php echo word_limiter($row->description, 15) ?></small></td>
-                      <td width="200">  <?php if($row->photo != '') : ?>
-                      <img src="<?php echo base_url("public/image/{$row->photo}") ?>" width="100" height="90">
+                      <td class="td-action" width="250">
+                        <?php echo $row->description ?>
+                      </td>
+                      <td width="100"><small>
+                        <?php  if($row->status_order = '1') : 
+                          echo "Selesai";
+                        else :
+                          echo "Menunggu";
+                        endif;
+                          ?>
+
+                          
+
+
+                        </small></td>
+                      <td class="td-action" width="100" ><small><?php echo $row->tanggal ?></small></td>
+                      <td width="200">  <?php if($row->photo_order != '') : ?>
+                      <img src="<?php echo base_url("public/image/path_order/{$row->photo_order}") ?>" width="140" height="100">
                     <?php endif; ?>
                   </td>
 

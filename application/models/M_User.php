@@ -49,7 +49,7 @@ class M_User extends CI_Model
 	public function updateUser($param = 0)
 	{
 		$user = $this->getUser($param);
-	
+		
 		// $config['upload_path'] = dirname($_SERVER["DOCUMENT_ROOT"]).'/public/image/data_profile';
 
 		if ($this->input->post('photo_profile')){
@@ -148,7 +148,7 @@ class M_User extends CI_Model
 
 			);
 		}
-			echo "Coba";
+		echo "Coba";
 		$this->db->update('users', $object, array('userId' => $param));
 		$this->session->set_flashdata('message', "Perubahan berhasil disimpan");
 	}
@@ -158,7 +158,7 @@ class M_User extends CI_Model
 	public function updateFotoUser($param = 0)
 	{
 		$user = $this->getUser($param);
-	
+		
 		$config['upload_path'] = './public/image/foto_user';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_width']  = 1024*3;
@@ -174,9 +174,9 @@ class M_User extends CI_Model
 			$photo_profile = $this->upload->file_name;
 		}
 
-			$object = array(
-				'photo_profile' => $photo_profile,
-			);
+		$object = array(
+			'photo_profile' => $photo_profile,
+		);
 		
 
 		$this->db->update('users', $object, array('userId' => $param));
@@ -186,7 +186,7 @@ class M_User extends CI_Model
 	public function updateFotoNpwp($param = 0)
 	{
 		$user = $this->getUser($param);
-	
+		
 		$config['upload_path'] = './public/image/foto_npwp';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_width']  = 1024*3;
@@ -202,9 +202,9 @@ class M_User extends CI_Model
 			$photo_npwp = $this->upload->file_name;
 		}
 
-			$object = array(
-				'photo_npwp' => $photo_npwp,
-			);
+		$object = array(
+			'photo_npwp' => $photo_npwp,
+		);
 		
 
 		$this->db->update('users', $object, array('userId' => $param));
@@ -214,7 +214,7 @@ class M_User extends CI_Model
 	public function updateFotoSppkp($param = 0)
 	{
 		$user = $this->getUser($param);
-	
+		
 		$config['upload_path'] = './public/image/foto_sppkp';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_width']  = 1024*3;
@@ -230,9 +230,9 @@ class M_User extends CI_Model
 			$photo_sppkp = $this->upload->file_name;
 		}
 
-			$object = array(
-				'photo_sppkp' => $photo_sppkp,
-			);
+		$object = array(
+			'photo_sppkp' => $photo_sppkp,
+		);
 		
 
 		$this->db->update('users', $object, array('userId' => $param));
@@ -242,7 +242,7 @@ class M_User extends CI_Model
 	public function updateFotoSiup($param = 0)
 	{
 		$user = $this->getUser($param);
-	
+		
 		$config['upload_path'] = './public/image/foto_siup';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_width']  = 1024*3;
@@ -258,9 +258,9 @@ class M_User extends CI_Model
 			$photo_siup = $this->upload->file_name;
 		}
 
-			$object = array(
-				'photo_siup' => $photo_siup,
-			);
+		$object = array(
+			'photo_siup' => $photo_siup,
+		);
 		
 
 		$this->db->update('users', $object, array('userId' => $param));
@@ -282,6 +282,7 @@ class M_User extends CI_Model
 		return $query->result();
 	}
 
+	
 	public function createPerusahaan()
 	{
 
@@ -343,20 +344,20 @@ class M_User extends CI_Model
 	}
 
 	public function reset_password($reset_key, $password)
-		{
-			$this->db->where('reset_password', $reset_key);
-			$data = array('password' => $password);
-			$this->db->update('users', $data);
-			return ($this->db->affected_rows()>0 )? TRUE:FALSE;
-		}
+	{
+		$this->db->where('reset_password', $reset_key);
+		$data = array('password' => $password);
+		$this->db->update('users', $data);
+		return ($this->db->affected_rows()>0 )? TRUE:FALSE;
+	}
 
 
 	public function check_reset_key($reset_key)
-		{
-			$this->db->where('reset_password', $reset_key);
-			$this->db->from('users');
-			return $this->db->count_all_results();
-		}
+	{
+		$this->db->where('reset_password', $reset_key);
+		$this->db->from('users');
+		return $this->db->count_all_results();
+	}
 
 
 

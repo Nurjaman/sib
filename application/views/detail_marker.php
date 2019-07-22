@@ -182,12 +182,12 @@
         <?php elseif ($this->session->userdata("role")=="Penyewa" || $reklame->status == "Tidak Tersedia") : ?>
 
           <?php elseif ($this->session->userdata("role")=="Pemilik Media"  || $reklame->status == "Tidak Tersedia") : ?>
-           <?php endif; ?>
+          <?php endif; ?>
 
-         </center>
+        </center>
 
-         <!-- ================= ORDER ====================== -->
-         <div class="modal fade" id="modal_order" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+        <!-- ================= ORDER ====================== -->
+        <div class="modal fade" id="modal_order" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -216,6 +216,36 @@
                       <span class="input-group-text">/Sewa</span>
                     </div>
                   </div>
+
+                  <small><i>Order Atas nama perushaan / diri sendiri</i></small>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Perusahaan : </span>
+                    </div>
+
+                    <select name="id_perusahaan" id="input" class="form-control" required>
+                      <option value="">---PILIH---</option>
+                      <?php 
+
+                      $where = $this->session->userdata('userId');
+
+                      $this->db->select('*');
+                      $this->db->from('tbl_perusahaan');
+                      $this->db->where('id_user',$where);
+                      $query = $this->db->get();
+
+                      foreach ($query->result() as $id_perusahaan => $row) 
+                      {
+                                        # code...
+                        echo '<option value="'.$row->id_perusahaan.'">'.$row->nm_perusahaan.'</option>';
+                      }
+                      ?>
+
+                    </select>
+                    <small><i>Jika belum mempunyai data <b>perusahaan</b>, silahkan tambah di <b>dashboard</b></i></small>
+
+                  </div>
+
 
                   <div class="form-group">
                     <label class="control-label col-xs-3" >Deskripsi</label>

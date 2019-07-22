@@ -24,7 +24,6 @@ class User extends CI_Controller
 	{
 		
 	}
-
 	public function addPerusahaan()
 	{	
 		$this->data['title'] = "Tambah Perusahaan";
@@ -49,6 +48,8 @@ class User extends CI_Controller
 
 		$this->load->view('buyer/add-perusahaan', $this->data);
 	}
+
+
 
 
 
@@ -512,13 +513,14 @@ class User extends CI_Controller
 				
 				if($this->email->send())
 				{
-					echo "silahkan cek email <b>".$this->input->post('email').'</b> untuk melakukan reset password';
+					$this->load->view('reset_password_sukses');
+					// echo "silahkan cek email <b>".$this->input->post('email').'</b> untuk melakukan reset password';
 				}else
 				{
 					echo "Berhasil melakukan registrasi, gagal mengirim verifikasi email";
 				}
 				
-				echo "<br><br><a href='".site_url("member-login")."'>Kembali ke Menu Login</a>";
+
 
 			}else {
 				die("Email yang anda masukan belum terdaftar");
@@ -557,7 +559,8 @@ class User extends CI_Controller
 			$password = password_hash($this->input->post('password'),PASSWORD_DEFAULT);
 
 			if($this->M_User->reset_password($reset_key, $password)){
-				echo "Password anda telah berhasil diubah";
+				// echo "Password anda telah berhasil diubah";
+				redirect('welcome');
 			}else{
 				echo "error";
 			}

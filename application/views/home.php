@@ -46,7 +46,9 @@
      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
    </div>
    <div class="form-group">
-     <label for="exampleInputPassword1">Password</label>
+     <label for="exampleInputPassword1">Password
+      <a href="<?php echo base_url().'user/reset_password_email'; ?>" style="color:red"> <i>Lupa password?</i> </a>
+     </label>
      <input type="password" name="password" class="form-control" required id="exampleInputPassword1" placeholder="Password">
    </div>
    <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -54,7 +56,7 @@
 
    <br>
    <!-- <a data-dismiss="modal" data-toggle="modal" data-target="#modal_lupas" href="#" >Lupa password </a> -->
-   <a href="<?php echo base_url().'user/reset_password_email'; ?>" >Lupa password </a>
+  
  </form>
 
 

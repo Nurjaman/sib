@@ -144,7 +144,7 @@ class Admin extends CI_Controller
 		$config['base_url'] = site_url("admin/reklame?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
 
 		$config['per_page'] = 10;
-		$config['total_rows'] = $this->madmin->getWhereReklame(null, null, 'num', $id_user);
+		$config['total_rows'] = $this->madmin->getAllReklame(null, null, 'num', $id_user);
 		$config['full_tag_open'] = '<ul class="pagination">';
 		$config['full_tag_close'] = '</ul>';
 		$config['first_link'] = "&larr; Pertama";
@@ -172,7 +172,7 @@ class Admin extends CI_Controller
 
 		$this->data = array(
 			'title' => "Data Reklame",
-			'reklame' => $this->madmin->getWhereReklame($config['per_page'], $this->input->get('page'), 'result', $id_user)
+			'reklame' => $this->madmin->getAllreklame($config['per_page'], $this->input->get('page'), 'result', $id_user)
 		);
 
 		$this->load->view('admin/data-reklame', $this->data);
@@ -546,6 +546,9 @@ class Admin extends CI_Controller
 	}
 
 
+	// Print Reklame
+	// =================================
+
 	public function printReklame($id)
 	{
 		$where = array('ID'=> $id);
@@ -563,6 +566,67 @@ class Admin extends CI_Controller
 
 		$this->load->view('cetak/cetakreklame.php',$data);
 	}
+
+	public function printReklameAll()
+	{
+		// $where = array('id_user'=> $id);
+		$data['reklame'] = $this->madmin->printReklameAll('reklame')->result();
+		// print_r($data);
+
+		$this->load->view('cetak/cetakreklame.php',$data);
+	}
+
+	// Print Order
+	// =================================
+	public function printOrder($id)
+	{
+		$where = array('no_invoice'=> $id);
+		$data['reklame'] = $this->madmin->printReklame($where,'tbl_order')->result();
+		// print_r($data);
+
+		$this->load->view('cetak/cetakorder.php',$data);
+	}
+
+	public function printOrderById($id)
+	{
+		$where = array('no_invoice'=> $id);
+		$data['reklame'] = $this->madmin->printReklameById($where,'tbl_order')->result();
+		// print_r($data);
+
+		$this->load->view('cetak/cetakorder.php',$data);
+	}
+
+	public function printOrderAll()
+	{
+		// $where = array('id_user'=> $id);
+		$data['reklame'] = $this->madmin->printReklameAll('tbl_order')->result();
+		// print_r($data);
+
+		$this->load->view('cetak/cetakorder.php',$data);
+	}
+
+
+	// Print User
+	// =================================
+
+		public function printUser($id)
+	{
+		$where = array('userId'=> $id);
+		$data['reklame'] = $this->madmin->printReklame($where,'users')->result();
+		// print_r($data);
+
+		$this->load->view('cetak/cetakuser.php',$data);
+	}
+
+	public function printUserAll()
+	{
+		// $where = array('id_user'=> $id);
+		$data['reklame'] = $this->madmin->printReklameAll('users')->result();
+		// print_r($data);
+
+		$this->load->view('cetak/cetakuser.php',$data);
+	}
+
 
 
 

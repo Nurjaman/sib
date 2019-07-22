@@ -14,9 +14,9 @@
  <!-- main -->
  <div class="main-agile">
  	<p>
- 	<div class="content">
- 		<div class="top-grids-center">
+ 		<div class="content">
  			<div class="top-grids-center">
+ 				<div class="top-grids-center">
 					<!-- <div class="signin-form reset-password">
 						<h3>Reset Password</h3>
 						<form action="#" method="post">
@@ -26,27 +26,16 @@
 						</form>
 					</div> -->
 
-					<div class="signin-form">
-						<h3>Recover Password</h3>
-						<form class="form-horizontal" action="<?php echo base_url().'user/email_reset_password_validation'; ?>" method="post" enctype="multipart/form-data">
-							<input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo set_value('email') ?>" name="email" aria-describedby="emailHelp" placeholder="Email" required>
+					<div class="signin-form recover-password">
+					<h3>silahkan cek email
+					"<b style="color:red"><?php echo $this->input->post('email');?></b>".
+					 untuk melakukan reset password.
+					
+					</h3>
 
-							<input type="submit" class="send" value="Submit Reset">
-							<div class="signin-agileits-bottom"> 
-								<p><a href="#" onclick="goBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i> Cancel and go back to Sistem Informasi Billboard</a></p>    
-
-							</div>
-						</form>
-					</div>
 				</div>
-				<div class="clear"> </div>
 			</div>
+			<div class="clear"> </div>
 		</div>
-	</div>	
-
-
-	<script>
-		function goBack() {
-			window.history.back();
-		}
-	</script>
+	</div>
+</div>	

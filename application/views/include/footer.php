@@ -190,6 +190,24 @@
       });
   }
 
+
+   function hapus_perusahaan(id_perusahaan){
+      swal({
+        title: "Hapus Perusahaan ? ",
+        text: "Jika iya, Data akan hilang !",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          window.location.href = "<?php echo base_url() ?>reklame/deleteperusahaan/"+id_perusahaan;
+        } else {
+          swal("Anda tidak jadi menghapus data ini ..");
+        }
+      });
+  }
+
    function hapus_order(no_invoice){
       swal({
         title: "Hapus Order ? ",

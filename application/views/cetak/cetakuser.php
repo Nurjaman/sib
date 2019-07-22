@@ -40,12 +40,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th class="text-center">Nama</th>
-                    <th class="text-center">Harga</th>
+                    <th class="text-center">Fullname</th>
+                    <th class="text-center">Username</th>
+                    <th class="text-center">Kota</th>
                     <th class="text-center">Alamat</th>
-                    <th class="text-center">Fasilitas</th>
-                    <th class="text-center">Deskripsi</th>
-                    <th class="text-center">Photo</th>
+                    <th class="text-center">Mobile</th>
+                    <th class="text-center">Email</th>
 
                   </tr>
                 </thead>
@@ -53,18 +53,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <?php foreach( $reklame as $row) : ?>
                     <tr>
                       <td><?php echo ++$this->page ?>.</td>
-                      <td class="td-action" width="250">
-                        <?php echo $row->name ?>
+                      <td class="td-action" width="100">
+                        <?php echo $row->fullname ?>
                       </td>
-                      <td><?php echo number_format($row->price) ?></td>
-                      <td width="200"><small><?php echo word_limiter($row->address, 15) ?></small></td>
-                      <td width="150"><small><?php echo $row->amenities ?></small></td>
-                      <td width="200"><small><?php echo word_limiter($row->description, 15) ?></small></td>
-                      <td width="200">  <?php if($row->photo != '') : ?>
-                      <img src="<?php echo base_url("public/image/{$row->photo}") ?>" width="100" height="90">
-                    <?php endif; ?>
-                  </td>
-
+                      <td class="td-action" width="100">
+                        <?php echo $row->username ?>
+                      </td>
+                       <td class="td-action" width="100">
+                        <?php echo $row->kota ?>
+                      </td>
+                       <td class="td-action" width="250">
+                        <?php echo $row->alamat ?>
+                      </td>
+                       <td class="td-action" width="100">
+                        <?php echo $row->mobile ?>
+                      </td>
+                       <td class="td-action" width="100">
+                        <?php echo $row->email ?>
+                      </td>
                 </tr>
               <?php endforeach; ?>
             </tbody>

@@ -410,6 +410,7 @@ class Madmin extends CI_Model
 			'no_invoice' => $this->input->post('no_invoice'),
 			'id_user' => $this->input->post('id_user'),
 			'id_reklame' => $this->input->post('id_reklame'),
+			'id_perusahaan' => $this->input->post('id_perusahaan'),
 			'description' => $this->input->post('description'),
 			'photo_order' => $photo_order,
 			'status_order' => $this->input->post('status_order'),
@@ -547,6 +548,7 @@ class Madmin extends CI_Model
 		$this->db->from('tbl_order');
 		$this->db->join('users','users.userId=tbl_order.id_user');
 		$this->db->join('reklame','reklame.ID=tbl_order.id_reklame');
+		$this->db->join('tbl_perusahaan','tbl_perusahaan.id_perusahaan=tbl_order.id_perusahaan');
 		$this->db->where($where);
 		$query = $this->db->get();
 		return $query->result();
@@ -616,7 +618,8 @@ class Madmin extends CI_Model
 		$this->session->set_flashdata('message', "Data berhasil Accept");
 	}
 
-
+// ------------------ PRINT ---------------------
+	// Print Reklame
 	public function printReklame($where,$table)
 	{
 		return $this->db->get_where($table,$where);
@@ -626,6 +629,13 @@ class Madmin extends CI_Model
 	{
 		return $this->db->get_where($table,$where);
 	}
+
+	public function printReklameAll($table)
+	{
+		return $this->db->get_where($table);
+	}
+	//  Print Order
+	
 
 
 	public function cariKategoriReklame($where)
@@ -720,11 +730,123 @@ class Madmin extends CI_Model
 		$query = $this->db->query("select * from tbl_order WHERE tbl_order.status_order = '1' AND MONTH(tanggal) = '11'" );
 		return $query;
 	}
-		public function getDataPemesananDesember(){
+	public function getDataPemesananDesember(){
 
 		$query = $this->db->query("select * from tbl_order WHERE tbl_order.status_order = '1' AND MONTH(tanggal) = '12'" );
 		return $query;
 	}
+
+
+
+	public function getWhereOrder($limit = 10, $offset = 0, $type = 'result', $id_user)
+	{
+		if( $this->input->get('q') != '')
+			$this->db->like('no_invoice', $this->input->get('q'));
+
+		$this->db->order_by('no_invoice', 'desc');
+
+		if($type == 'num')
+		{
+			return $this->db->get('tbl_order')->num_rows();
+
+		} else {
+			
+			$this->db->where('id_user', $id_user);
+			return $this->db->get('tbl_order', $limit, $offset)->result();
+		}
+	}
+
+	public function getWherePerusahaan($limit = 10, $offset = 0, $type = 'result', $id_user)
+	{
+		if( $this->input->get('q') != '')
+			$this->db->like('nm_perusahaan', $this->input->get('q'));
+
+		$this->db->order_by('id_perusahaan', 'desc');
+
+		if($type == 'num')
+		{
+			return $this->db->get('tbl_perusahaan')->num_rows();
+
+		} else {
+			
+			$this->db->where('id_user', $id_user);
+			return $this->db->get('tbl_perusahaan', $limit, $offset)->result();
+		}
+	}
+
+	// =========== PERUSAHAAN
+	public function getPerusahaan($param = 0)
+	{
+		return $this->db->get_where('tbl_perusahaan', array('id_perusahaan' => $param) )->row();
+	}
+
+
+	public function updatePerusahaan($param = 0)
+	{
+		$perusahaan = $this->getPerusahaan($param);
+
+
+		$object = array(
+			'nm_perusahaan' => $this->input->post('nm_perusahaan'),
+			'jabatan_perusahaan' => $this->input->post('jabatan_perusahaan'),
+			'direktur_perusahaan' => $this->input->post('direktur_perusahaan'),
+			'kontak_perusahaan' => $this->input->post('kontak_perusahaan'),
+			'mobile_perusahaan' => $this->input->post('mobile_perusahaan'),
+			'fax_perusahaan' => $this->input->post('fax_perusahaan'),
+			'alamat_perusahaan' => $this->input->post('alamat_perusahaan'),
+		);
+
+		$this->db->update('tbl_perusahaan', $object, array('id_perusahaan' => $param));
+		$this->session->set_flashdata('message', "Perubahan berhasil disimpan");
+	}
+
+	public function getAllPerusahaan($limit = 10, $offset = 0, $type = 'result')
+	{
+		if( $this->input->get('q') != '')
+			$this->db->like('nm_perusahaan', $this->input->get('q'));
+
+		$this->db->order_by('id_perusahaan', 'desc');
+
+		if($type == 'num')
+		{
+			return $this->db->get('tbl_perusahaan')->num_rows();
+		} else {
+			return $this->db->get('tbl_perusahaan', $limit, $offset)->result();
+		}
+	}
+
+
+	public function deletePerusahaan($param = 0)
+	{
+		$perusahaan = $this->getPerusahaan($param);
+
+		
+		$this->db->delete('tbl_perusahaan', array('id_perusahaan' => $param));
+		
+
+		$this->session->set_flashdata('message', "Data berhasil dihapus");
+	}
+	public function createPerusahaan()
+	{
+
+
+		$object = array(
+			'id_user' => $this->input->post('id_user'),
+			'nm_perusahaan' => $this->input->post('nm_perusahaan'),
+			'jabatan_perusahaan' => $this->input->post('jabatan_perusahaan'),
+			'direktur_perusahaan' => $this->input->post('direktur_perusahaan'),
+			'kontak_perusahaan' => $this->input->post('kontak_perusahaan'),
+			'mobile_perusahaan' => $this->input->post('mobile_perusahaan'),
+			'fax_perusahaan' => $this->input->post('fax_perusahaan'),
+			'alamat_perusahaan' => $this->input->post('alamat_perusahaan'),
+		);
+
+			// return $object;
+
+		$this->db->insert('tbl_perusahaan', $object);
+		$this->session->set_flashdata('message', "Data berhasil ditambahkan");
+	}
+
 	
 
 

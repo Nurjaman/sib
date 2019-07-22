@@ -58,6 +58,7 @@ class Detail extends CI_Controller
 		$this->form_validation->set_rules('no_invoice', 'no_invoice', 'trim|required');
 		$this->form_validation->set_rules('id_user', 'id_user', 'trim|required');
 		$this->form_validation->set_rules('id_reklame', 'id_reklame', 'trim|required');
+		$this->form_validation->set_rules('id_perusahaan', 'id_perusahaan', 'trim|required');
 		$this->form_validation->set_rules('tgl_pesan', 'tgl_pesan', 'trim|required');
 		$this->form_validation->set_rules('description', 'description', 'trim|required');
 		$this->form_validation->set_rules('status_order', 'status', 'trim|required');
@@ -120,7 +121,7 @@ class Detail extends CI_Controller
 			<script type='text/javascript'>
 			swal({
 				title: 'Sukses',
-				text: 'Reklame telah dihapus ! ',
+				text: 'Status Order ini telah dihapus ! ',
 				icon: 'success',
 				confirmButtonText: 'OK'
 				})

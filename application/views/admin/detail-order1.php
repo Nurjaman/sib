@@ -22,118 +22,119 @@ $this->load->view('include/header', $this->data);
      <form class="form-horizontal" action="<?php echo current_url(); ?>" method="post" enctype="multipart/form-data">
 
 
-        <div class="row">
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-body">
-               <div class="card-header">
-                <h4>Data Diri  
-                  <small class="form-text text-muted">Data detail Users penyewa</small></h4>
-                </div>
-                <br>
-                <div class="form-group row mb-4">
-                  <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Username</label>
-                  <div class="col-sm-12 col-md-7">
-                   <input type="text" name="username" class="form-control" value="<?php echo $reklame[0]->username ?>" placeholder="">
-                   <p class="help-block"><?php  echo form_error('username', '<small class="text-red">', '</small>'); ?></p>
-                 </div>
-               </div>
 
-
-               <div class="form-group row mb-4">
-                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Fullname</label>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+             <div class="card-header">
+              <h4>Data Diri  
+                <small class="form-text text-muted">Data detail Users penyewa</small></h4>
+              </div>
+              <br>
+              <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Username</label>
                 <div class="col-sm-12 col-md-7">
-                 <input type="text" name="fullname" class="form-control" value="<?php echo $reklame[0]->fullname ?>" placeholder="">
-                 <p class="help-block"><?php  echo form_error('fullname', '<small class="text-red">', '</small>'); ?></p>
+                 <input type="text" name="username" class="form-control" value="<?php echo $reklame[0]->username ?>" placeholder="">
+                 <p class="help-block"><?php  echo form_error('username', '<small class="text-red">', '</small>'); ?></p>
                </div>
              </div>
 
+
              <div class="form-group row mb-4">
-              <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
+              <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Fullname</label>
               <div class="col-sm-12 col-md-7">
-               <input type="text" name="email" class="form-control" value="<?php echo $reklame[0]->email ?>" placeholder="">
-               <p class="help-block"><?php  echo form_error('email', '<small class="text-red">', '</small>'); ?></p>
+               <input type="text" name="fullname" class="form-control" value="<?php echo $reklame[0]->fullname ?>" placeholder="">
+               <p class="help-block"><?php  echo form_error('fullname', '<small class="text-red">', '</small>'); ?></p>
              </div>
            </div>
 
            <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Mobile</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
             <div class="col-sm-12 col-md-7">
-             <input type="text" name="mobile" class="form-control" value="<?php echo $reklame[0]->mobile ?>" placeholder="">
-             <p class="help-block"><?php  echo form_error('mobile', '<small class="text-red">', '</small>'); ?></p>
+             <input type="text" name="email" class="form-control" value="<?php echo $reklame[0]->email ?>" placeholder="">
+             <p class="help-block"><?php  echo form_error('email', '<small class="text-red">', '</small>'); ?></p>
            </div>
          </div>
-
-
-
-         <div class="card-header">
-          <h4>Data Reklame
-            <small class="form-text text-muted">Data detail Reklame yang akan di pesan oleh penyewa</small></h4>
-          </div>
-          <br>
-          <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Reklame</label>
-            <div class="col-sm-12 col-md-7">
-              <input type="text" name="email" class="form-control" value="<?php echo $reklame[0]->name ?>" placeholder="">
-              <p class="help-block"><?php  echo form_error('Kota', '<small class="text-red">', '</small>'); ?></p>
-            </div>
-          </div>
-
-          <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Harga reklame</label>
-            <div class="col-sm-12 col-md-7">
-              <input type="text" name="email" class="form-control" value="<?php echo number_format($reklame[0]->price) ?>" placeholder="">
-              <p class="help-block"><?php  echo form_error('kode_pos', '<small class="text-red">', '</small>'); ?></p>
-            </div>
-          </div>
-
-          <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alamat</label>
-            <div class="col-sm-12 col-md-7">
-             <textarea rows="10"  name="address" class="form-control"> <?php echo $reklame[0]->address ?> </textarea>
-             <p class="help-block"><?php  echo form_error('address', '<small class="text-red">', '</small>'); ?></p>
-           </div>
-         </div>
-
 
          <div class="form-group row mb-4">
-          <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Koordinate</label>
+          <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Mobile</label>
           <div class="col-sm-12 col-md-7">
-           <small class="form-text text-muted">Latitude</small>
-           <input type="text" name="latitude" class="form-control" value="<?php echo $reklame[0]->latitude ?>" placeholder="">
-           <small class="form-text text-muted">Longitude</small>
-           <input type="text" name="longitude" class="form-control" value="<?php echo $reklame[0]->longitude ?>" placeholder="">
+           <input type="text" name="mobile" class="form-control" value="<?php echo $reklame[0]->mobile ?>" placeholder="">
+           <p class="help-block"><?php  echo form_error('mobile', '<small class="text-red">', '</small>'); ?></p>
          </div>
        </div>
 
+
+
+       <div class="card-header">
+        <h4>Data Reklame
+          <small class="form-text text-muted">Data detail Reklame yang akan di pesan oleh penyewa</small></h4>
+        </div>
+        <br>
+        <div class="form-group row mb-4">
+          <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Reklame</label>
+          <div class="col-sm-12 col-md-7">
+            <input type="text" name="email" class="form-control" value="<?php echo $reklame[0]->name ?>" placeholder="">
+            <p class="help-block"><?php  echo form_error('Kota', '<small class="text-red">', '</small>'); ?></p>
+          </div>
+        </div>
+
+        <div class="form-group row mb-4">
+          <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Harga reklame</label>
+          <div class="col-sm-12 col-md-7">
+            <input type="text" name="email" class="form-control" value="<?php echo number_format($reklame[0]->price) ?>" placeholder="">
+            <p class="help-block"><?php  echo form_error('kode_pos', '<small class="text-red">', '</small>'); ?></p>
+          </div>
+        </div>
+
+        <div class="form-group row mb-4">
+          <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alamat</label>
+          <div class="col-sm-12 col-md-7">
+           <textarea rows="10"  name="address" class="form-control"> <?php echo $reklame[0]->address ?> </textarea>
+           <p class="help-block"><?php  echo form_error('address', '<small class="text-red">', '</small>'); ?></p>
+         </div>
+       </div>
+
+
        <div class="form-group row mb-4">
-        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jenis Media</label>
+        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Koordinate</label>
         <div class="col-sm-12 col-md-7">
-         <input type="text" name="jenis_media" class="form-control" value="<?php echo $reklame[0]->jenis_media ?>" placeholder="">
-         <p class="help-block"><?php  echo form_error('jenis_media', '<small class="text-red">', '</small>'); ?></p>
+         <small class="form-text text-muted">Latitude</small>
+         <input type="text" name="latitude" class="form-control" value="<?php echo $reklame[0]->latitude ?>" placeholder="">
+         <small class="form-text text-muted">Longitude</small>
+         <input type="text" name="longitude" class="form-control" value="<?php echo $reklame[0]->longitude ?>" placeholder="">
        </div>
      </div>
 
-     <!-- Foto Reklame -->
      <div class="form-group row mb-4">
-      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Foto :</label>
-      <div class="col-md-4">
-        <?php if($reklame[0]->photo != '') : ?>
-         <a class="example-image-link" href="<?php echo base_url("public/image/{$reklame[0]->photo}") ?>" data-lightbox="example-set" data-title="Foto Reklame yang akan dipesan"><img alt="Bootstrap template" src="<?php echo base_url("public/image/{$reklame[0]->photo}") ?>"  height="150" width="250"/> </a>
-
-       <?php endif; ?>
+      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jenis Media</label>
+      <div class="col-sm-12 col-md-7">
+       <input type="text" name="jenis_media" class="form-control" value="<?php echo $reklame[0]->jenis_media ?>" placeholder="">
+       <p class="help-block"><?php  echo form_error('jenis_media', '<small class="text-red">', '</small>'); ?></p>
      </div>
    </div>
 
+   <!-- Foto Reklame -->
    <div class="form-group row mb-4">
-    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Ukuran</label>
-    <div class="col-sm-12 col-md-7">
-     <input type="text" name="Ukuran" class="form-control" value="<?php echo $reklame[0]->ukuran ?>" placeholder="">
-     <p class="help-block"><?php  echo form_error('jenis_media', '<small class="text-red">', '</small>'); ?></p>
+    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Foto :</label>
+    <div class="col-md-4">
+      <?php if($reklame[0]->photo != '') : ?>
+       <a class="example-image-link" href="<?php echo base_url("public/image/{$reklame[0]->photo}") ?>" data-lightbox="example-set" data-title="Foto Reklame yang akan dipesan"><img alt="Bootstrap template" src="<?php echo base_url("public/image/{$reklame[0]->photo}") ?>"  height="150" width="250"/> </a>
+
+     <?php endif; ?>
    </div>
  </div>
 
  <div class="form-group row mb-4">
+  <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Ukuran</label>
+  <div class="col-sm-12 col-md-7">
+   <input type="text" name="Ukuran" class="form-control" value="<?php echo $reklame[0]->ukuran ?>" placeholder="">
+   <p class="help-block"><?php  echo form_error('jenis_media', '<small class="text-red">', '</small>'); ?></p>
+ </div>
+</div>
+
+<div class="form-group row mb-4">
   <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Web Pemilik Media</label>
   <div class="col-sm-12 col-md-7">
     <a href="<?php echo $reklame[0]->link  ?>" target="_blank"> 
@@ -197,6 +198,36 @@ $this->load->view('include/header', $this->data);
   </div>
 </div>
 
+<div class="card-header">
+  <h4>Data Perusahaan
+    <small class="form-text text-muted">*Data detail Perusahaan/Diri yang terkait.</small>
+  </h4>
+</div>
+<br>
+
+<div class="form-group row mb-4">
+  <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Perusahaan</label>
+  <div class="col-sm-12 col-md-7">
+   <input type="text" name="nm_perusahaan" class="form-control" value="<?php echo $reklame[0]->nm_perusahaan ?>" placeholder="">
+   <p class="help-block"><?php  echo form_error('nm_perusahaan', '<small class="text-red">', '</small>'); ?></p>
+ </div>
+</div>
+
+<div class="form-group row mb-4">
+  <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Kontak Perusahaan</label>
+  <div class="col-sm-12 col-md-7">
+   <input type="text" name="kontak_perusahaan" class="form-control" value="<?php echo $reklame[0]->kontak_perusahaan ?>" placeholder="">
+   <p class="help-block"><?php  echo form_error('kontak_perusahaan', '<small class="text-red">', '</small>'); ?></p>
+ </div>
+</div>
+
+<div class="form-group row mb-4">
+  <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+  <div class="col-sm-12 col-md-7">
+    <a  data-toggle="modal" data-target="#modal_perusahaan" href="#"  class="btn btn-info btn-block" style="align-item:center" target="_blank">Detail Data Perusahaan</a>
+  </div>
+</div>
+
 
 <div class="card-header">
   <h4>Data Photo
@@ -211,22 +242,22 @@ $this->load->view('include/header', $this->data);
   <div class="col-md-4">
     <?php if($reklame[0]->photo_npwp != '') : ?>
       <a class="example-image-link" href="<?php echo base_url("public/image/foto_npwp/{$reklame[0]->photo_npwp}") ?>" data-lightbox="example-set" data-title="Foto NPWP"><img  alt="Bootstrap template" src="<?php echo base_url("public/image/foto_npwp/{$reklame[0]->photo_npwp}") ?>" height="150" width="250" /> </a>
-     <?php else : ?>
-     <img src="<?php echo base_url("public/image/no_image.jpg") ?>" height="150" width="250" /> </a>
-    <?php endif; ?>
-  </div>
-</div>
+      <?php else : ?>
+       <img src="<?php echo base_url("public/image/no_image.jpg") ?>" height="150" width="250" /> </a>
+     <?php endif; ?>
+   </div>
+ </div>
 
-<!-- Foto Reklame -->
-<div class="form-group row mb-4">
+ <!-- Foto Reklame -->
+ <div class="form-group row mb-4">
   <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Foto SPPKP :</label>
   <div class="col-md-4">
-     <?php if($reklame[0]->photo_sppkp != '') : ?>
-      <a class="example-image-link" href="<?php echo base_url("public/image/foto_sppkp/{$reklame[0]->photo_sppkp}") ?>" data-lightbox="example-set" data-title="Foto SPPKP"><img  alt="Bootstrap template" src="<?php echo base_url("public/image/foto_sppkp/{$reklame[0]->photo_sppkp}") ?>" height="150" width="250" /> </a>
-     <?php else : ?>
+   <?php if($reklame[0]->photo_sppkp != '') : ?>
+    <a class="example-image-link" href="<?php echo base_url("public/image/foto_sppkp/{$reklame[0]->photo_sppkp}") ?>" data-lightbox="example-set" data-title="Foto SPPKP"><img  alt="Bootstrap template" src="<?php echo base_url("public/image/foto_sppkp/{$reklame[0]->photo_sppkp}") ?>" height="150" width="250" /> </a>
+    <?php else : ?>
      <img src="<?php echo base_url("public/image/no_image.jpg") ?>" height="150" width="250" /> </a>
-    <?php endif; ?>
-  </div>
+   <?php endif; ?>
+ </div>
 </div>
 
 
@@ -234,22 +265,22 @@ $this->load->view('include/header', $this->data);
 <div class="form-group row mb-4">
   <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Foto SIUP :</label>
   <div class="col-md-4">
-      <?php if($reklame[0]->photo_siup != '') : ?>
+    <?php if($reklame[0]->photo_siup != '') : ?>
       <a class="example-image-link" href="<?php echo base_url("public/image/foto_siup/{$reklame[0]->photo_siup}") ?>" data-lightbox="example-set" data-title="Foto SIUP"><img  alt="Bootstrap template" src="<?php echo base_url("public/image/foto_siup/{$reklame[0]->photo_siup}") ?>" height="150" width="250" /> </a>
-     <?php else : ?>
-     <img src="<?php echo base_url("public/image/no_image.jpg") ?>" height="150" width="250" /> </a>
-    <?php endif; ?>
-  </div>
-</div>
-<hr>
-<div class="form-group row mb-4">
+      <?php else : ?>
+       <img src="<?php echo base_url("public/image/no_image.jpg") ?>" height="150" width="250" /> </a>
+     <?php endif; ?>
+   </div>
+ </div>
+ <hr>
+ <div class="form-group row mb-4">
   <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
   <div class="col-sm-12 col-md-7">
     <?php if($reklame[0]->status_order == "0") : ?>
-    <a type="submit" class="btn btn-info btn-block" data-toggle="modal" onclick="acceptOrder('<?php //echo $reklame[0]->no_invoice ?>')"  style="color: green" class="fas fa-check" value="Accept"><i class="fas fa-check">Accept</i></a>
+      <a type="submit" class="btn btn-info btn-block" data-toggle="modal" onclick="acceptOrder('<?php //echo $reklame[0]->no_invoice ?>')"  style="color: green" class="fas fa-check" value="Accept"><i class="fas fa-check">Accept</i></a>
 
 
-     <!--  <a title="Accept" class="btn btn-info btn-block" data-placement="right" class="btn btn-danger"  href="#myModal"  onclick="acceptOrder('<?php echo $reklame[0]->no_invoice ?>')"  style="color: white" class="fas fa-check">Accept</a> -->
+      <!--  <a title="Accept" class="btn btn-info btn-block" data-placement="right" class="btn btn-danger"  href="#myModal"  onclick="acceptOrder('<?php echo $reklame[0]->no_invoice ?>')"  style="color: white" class="fas fa-check">Accept</a> -->
       <?php else : ?>
         <a type="submit" class="btn btn-danger btn-block" onclick="declineOrder('<?php echo $reklame[0]->no_invoice ?>')" style="color: white" value="Decline">
          <i class="fas fa-exclamation">Decline</i></a> 
@@ -257,7 +288,15 @@ $this->load->view('include/header', $this->data);
          <!--  <a title="Accept" class="btn btn-info btn-block" data-placement="right" class="btn btn-danger"  href="#myModal"  onclick="acceptOrder('<?php echo $reklame[0]->no_invoice ?>')"  style="color: white" class="fas fa-check">Accept</a> -->
        <?php endif; ?>
      </div>
+
+
+
+
+
    </div>
+
+
+
 
 
 
@@ -314,11 +353,72 @@ $this->load->view('include/header', $this->data);
 
 
 
+
 </div>
 </div>
 </div>
 </section>
 </div>
+<!-- Modal Login-->
+ <div class="modal fade" id="modal_perusahaan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+
+     <h5 class="modal-title" id="exampleModalLabel">DETAIL | DATA PERUSAHAAN</h5>
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+     <label>Nama Perusahaan</label>
+     <input type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="<?php echo $reklame[0]->nm_perusahaan ?>" readonly>
+   </div>
+
+    <div class="form-group">
+     <label>Jabatan Perusahaan</label>
+     <input type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="<?php echo $reklame[0]->jabatan_perusahaan ?>" readonly>
+   </div>
+
+    <div class="form-group">
+     <label>Nama Direktur Perusahaan</label>
+     <input type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="<?php echo $reklame[0]->direktur_perusahaan ?>" readonly>
+   </div>
+
+    <div class="form-group">
+     <label>Nama Kontak di kontrak </label>
+     <input type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="<?php echo $reklame[0]->kontak_perusahaan ?>" readonly>
+   </div>
+
+     <div class="form-group">
+     <label>Mobile</label>
+     <input type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="<?php echo $reklame[0]->mobile_perusahaan ?>" readonly>
+   </div>
+
+     <div class="form-group">
+     <label>Nama Kontak di kontrak </label>
+     <input type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="<?php echo $reklame[0]->fax_perusahaan ?>" readonly>
+   </div>
+
+     <div class="form-group">
+     <label>Nama Kontak di kontrak </label>
+     <textarea required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" readonly><?php echo $reklame[0]->kontak_perusahaan ?></textarea>
+   </div>
+
+
+
+
+
+ </div>
+ </form>
+
+
+</div>
+</div>
+</div>
+</div>
+<!-- End Modal Login -->  
 
 <?php
 $this->load->view('include/footer', $this->data);
