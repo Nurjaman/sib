@@ -78,7 +78,7 @@
               <div class="d-sm  -none d-lg-inline-block">Hi,<?php echo $q->fullname; ?> </div></a>
               <div class="dropdown-menu dropdown-menu-right">
 
-                <a href="<?php echo base_url('user/updateUser/'.$q->userId  ) ?>" class="dropdown-item has-icon">
+                <a href="<?php echo base_url('user/updateuser1/'.$q->userId ) ?>" class="dropdown-item has-icon">
                   <i class="fas fa-cog"></i> Settings
                 </a>
                 <div class="dropdown-divider"></div>
@@ -113,8 +113,8 @@
               <li class="<?php echo active_link_method('adduser', 'admin') ?>">
                 <a href="<?php echo base_url('admin/adduser') ?>" class="nav-link  "><i class="fas fa-plus"></i><span>Tambah User</span></a>
               </li>
-              <li class="<?php echo active_link_method('addperusahaan', 'user') ?>">
-                <a href="<?php echo base_url('user/addPerusahaan') ?>" class="nav-link  "><i class="fas fa-plus"></i><span>Tambah Perusahaan</span></a>
+                <li class="<?php echo active_link_method('addkategori', 'admin') ?>">
+                <a href="<?php echo base_url('admin/addkategori') ?>" class="nav-link  "><i class="fas fa-plus"></i><span>Tambah Kategori</span></a>
               </li>
 
               <li class="menu-header">Data Master</li>
@@ -125,7 +125,10 @@
                 <a href="<?php echo base_url('admin/order') ?>" class="nav-link  "><i class="fas fa-database"></i><span>Data Pemesanan</span></a>
               </li>
               <li class="<?php echo active_link_method('user', 'admin') ?>">
-                <a href="<?php echo base_url('admin/user') ?>" class="nav-link  "><i class="fas fa-database"></i><span> Data User</span></a>
+                <a href="<?php echo base_url('admin/user') ?>" class="nav-link  "><i class="fas fa-database"></i><span>Data User</span></a>
+              </li>
+              <li class="<?php echo active_link_method('kategorireklame', 'admin') ?>">
+                <a href="<?php echo base_url('admin/kategorireklame') ?>" class="nav-link  "><i class="fas fa-database"></i><span>Data Kategori Reklame</span></a>
               </li>
 
               <li class="menu-header">Pengaturan</li>

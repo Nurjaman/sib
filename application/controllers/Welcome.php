@@ -109,7 +109,7 @@ public function searchQuery()
 	$this->db->group_by('reklame.ID');
 
 	if($this->input->get('q') != '')
-		$this->db->like('reklame.name', $this->input->get('q'));
+		$this->db->like('reklame.address', $this->input->get('q'));
 
 	$this->db->where('reklame.latitude !=', NULL)
 	->where('reklame.longitude !=', NULL);

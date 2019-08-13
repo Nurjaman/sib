@@ -55,29 +55,6 @@ class User extends CI_Controller
 
 	public function auth()
 	{
-		// $checking = FALSE;
-		// $username = $this->input->post('identity',TRUE);
-		// $password = password_verify($this->input->post('password'), TRUE);
-		// $checking = $this->M_User->check_login('users', array('email' => $username), array('password' => $password));
-
-		// $email = $this->input->post('identity');
-		// $password = password_verify($this->input->post('password'), TRUE);
-		// $where = array(
-		// 	'email' => $email,
-		// 	'password' => $password,
-		// 	);
-		// $cek = $this->M_User->check_login("users",$where)->num_rows();
-		// if($cek > 0){
-		// 	$data_session = array(
-		// 		'email' => $email,
-		// 		'status' => "login"
-		// 		);
-		// 	$this->session->set_userdata($data_session);
-		// 	echo "Berhasil login";
-		// }else{
-		// 	echo "Username dan password salah !";
-		// }
-
 
 		$userLogin = $this->getUserLogin($this->input->post('identity'));
 
@@ -114,49 +91,15 @@ class User extends CI_Controller
 
 
 
-
-		// $userLogin = $this->getUserLogin($this->input->post('identity'));
-		// if( $checking == TRUE ) 
-		// {
-		// 	foreach ($checking as $userLogin) {
-		// 		# code...
-
-		// 	// if ( password_verify($this->input->post('password'), $userLogin->password) ) 
-		// 	// {
-		// 		$user_session = array(
-		// 			// 'admin_login' => TRUE,
-		// 			'userId' => $userLogin->userId,
-		// 			'nama' => $userLogin->fullname,
-		// 			'email' => $userLogin->email,
-		// 			// 'user' => $userLogin,
-		// 			'role' => $userLogin->role,
-		// 		);	
-		// 		$this->session->set_userdata( $user_session );
-		// 		if($this->session->userdata("role") == "Admin"){
-		// 			redirect(base_url('admin'));
-		// 		}elseif($this->session->userdata("role") == "Penyewa"){
-		// 			redirect(base_url('buyer'));
-		// 		}elseif($this->session->userdata("role") == "Pemilik Media"){
-		// 			redirect(base_url('seller'));
-		// 		}
-		// 	}
-		// } else {
-		// 	$this->session->set_flashdata('message', 'Kombinasi Username/E-Mail dan Password tidak cocok.');
-		// 	redirect(base_url());
-		// }
-		// } else {
-		// 	$this->session->set_flashdata('message', 'Mohon Masukkan Username/E-Mail dan Password.');
-		// 	redirect(base_url());
-		// }
 	}
 
 	public function getUserLogin($identity = '')
 	{
 		if (filter_var($identity, FILTER_VALIDATE_EMAIL)) 
 		{
-			return $this->db->get_where('users', array('email' => $identity))->row();
+			return $this->db->get_where('users', array('email' => $identity, 'status_aktif'=>'1'))->row();
 		} else {
-			return $this->db->get_where('users', array('username' => $identity))->row();
+			return $this->db->get_where('users', array('username' => $identity,'status_aktif'=>'1'))->row();
 		}
 	}
 
@@ -173,10 +116,11 @@ class User extends CI_Controller
 
 		$this->data['title'] = "Register";
 
-		$this->form_validation->set_rules('username', 'username', 'trim|required');
+		$this->form_validation->set_rules('fullname', 'fullname', 'trim|required');
 		$this->form_validation->set_rules('mobile', 'mobile', 'trim|required');
 		$this->form_validation->set_rules('email', 'email', 'trim|required');
-		$this->form_validation->set_rules('password', 'password', 'trim|required');
+		$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|matches[retype_password]');
+		$this->form_validation->set_rules('retype_password', 'Retype Password', 'required|min_length[6]|matches[password]');
 		$this->form_validation->set_rules('role', 'role', 'trim|required');
 
 		if ($this->form_validation->run() == TRUE)
@@ -451,28 +395,9 @@ class User extends CI_Controller
     }
 
     public function reset_password_email()
-	{
-		$this->load->view('reset_password_email');
-	}
-
-    // public function reset_password_validation(){
-    // 	$this->form_validation->set_rules('email','Email','required|valid_email|trim');
-    // 	if($this->form_validation->run()){
-    // 		$email = $this->input->post('email');
-    // 		$reset_key = random_string('alnum',50);
-
-    // 		if($this->M_User->update_reset_key($email,$reset_key))
-    // 		{
-    // 			var_dump("Ada");
-    // 		}else{
-    // 			var_dump("Error");
-    // 		}
-    // 	}else{
-    // 		echo 0;
-    // 		// redirect('Welcome');
-    // 		$this->load->view('reset_password');
-    // 	}
-    // }
+    {
+    	$this->load->view('reset_password_email1');
+    }
 
 
     public function email_reset_password_validation(){
@@ -513,7 +438,7 @@ class User extends CI_Controller
 				
 				if($this->email->send())
 				{
-					$this->load->view('reset_password_sukses');
+					$this->load->view('reset_password_sukses1');
 					// echo "silahkan cek email <b>".$this->input->post('email').'</b> untuk melakukan reset password';
 				}else
 				{
@@ -526,7 +451,7 @@ class User extends CI_Controller
 				die("Email yang anda masukan belum terdaftar");
 			}
 		} else{
-			$this->load->view('reset_password');
+			$this->load->view('reset_password1');
 			// redirect('Welcome');
 
 		}
@@ -542,7 +467,7 @@ class User extends CI_Controller
 
 		if($this->M_User->check_reset_key($reset_key) == 1)
 		{
-			$this->load->view('reset_password');
+			$this->load->view('reset_password1');
 		} else{
 			die("reset key salah");
 		}
@@ -564,10 +489,27 @@ class User extends CI_Controller
 			}else{
 				echo "error";
 			}
-		
+
 		}else{
-			$this->load->view('reset_password');
-		}
+			$this->load->view('reset_password1');
+		} 
+	}
+
+	public function deleteUser($param = 0)
+	{
+		$this->Madmin->deleteUser($param);
+
+		$this->session->set_flashdata('pesan',"	
+			<script type='text/javascript'>
+			swal({
+				title: 'Sukses',
+				text: 'Users ini telah dihapus ! ',
+				icon: 'success',
+				confirmButtonText: 'OK'
+				})
+				</script>");
+
+		redirect('admin/user');
 	}
 
 

@@ -296,6 +296,7 @@ class Madmin extends CI_Model
 		$this->session->set_flashdata('message', "Perubahan berhasil disimpan.");
 	}
 
+
 	public function getAccount()
 	{
 		return $this->db->get_where('users', array('userId' => $this->session->userdata('user')->userId) )->row();
@@ -410,7 +411,7 @@ class Madmin extends CI_Model
 			'no_invoice' => $this->input->post('no_invoice'),
 			'id_user' => $this->input->post('id_user'),
 			'id_reklame' => $this->input->post('id_reklame'),
-			'id_perusahaan' => $this->input->post('id_perusahaan'),
+			'perusahaan_id' => $this->input->post('id_perusahaan'),
 			'description' => $this->input->post('description'),
 			'photo_order' => $photo_order,
 			'status_order' => $this->input->post('status_order'),
@@ -512,6 +513,14 @@ class Madmin extends CI_Model
 	}
 
 
+	public function deletekategory($param = 0)
+	{
+		$this->db->delete('categories', array('category_id' => $param));	
+
+		$this->session->set_flashdata('message', "Data berhasil dihapus");
+	}
+
+
 
 	public function getAllOrder($limit = 10, $offset = 0, $type = 'result')
 	{
@@ -548,7 +557,7 @@ class Madmin extends CI_Model
 		$this->db->from('tbl_order');
 		$this->db->join('users','users.userId=tbl_order.id_user');
 		$this->db->join('reklame','reklame.ID=tbl_order.id_reklame');
-		$this->db->join('tbl_perusahaan','tbl_perusahaan.id_perusahaan=tbl_order.id_perusahaan');
+		$this->db->join('tbl_perusahaan','tbl_perusahaan.id_perusahaan=tbl_order.perusahaan_id','left');
 		$this->db->where($where);
 		$query = $this->db->get();
 		return $query->result();
@@ -574,6 +583,36 @@ class Madmin extends CI_Model
 		} else {
 			return $this->db->get('users', $limit, $offset)->result();
 		}
+	}
+
+	public function getUser($param = 0)
+	{
+		return $this->db->get_where('users', array('userId' => $param) )->row();
+	}
+
+	public function deleteUser($param = 0)
+	{
+		$user = $this->getUser($param);
+
+		if( $user->photo_profile != '')
+			@unlink(".pulbic/image/foto_user/{$user->photo_profile}");
+
+		if( $user->photo_npwp != '')
+			@unlink(".pulbic/image/foto_npwp/{$user->photo_npwp}");
+
+		if( $user->photo_sppkp != '')
+			@unlink(".pulbic/image/foto_sppkp/{$user->photo_sppkp}");
+
+		if( $user->photo_siup != '')
+			@unlink(".pulbic/image/foto_siup/{$user->photo_siup}");
+
+
+
+
+		$this->db->delete('users', array('userId' => $param));
+		
+
+		$this->session->set_flashdata('message', "Data berhasil dihapus");
 	}
 
 	public function createUser()
@@ -849,6 +888,56 @@ class Madmin extends CI_Model
 
 	
 
+	public function getAllkategori($limit = 10, $offset = 0, $type = 'result')
+	{
+		if( $this->input->get('q') != '')
+			$this->db->like('name', $this->input->get('q'));
+
+		$this->db->order_by('name', 'desc');
+
+		if($type == 'num')
+		{
+			return $this->db->get('categories')->num_rows();
+		} else {
+			return $this->db->get('categories', $limit, $offset)->result();
+		}
+	}
+
+
+	public function createkategori()
+	{
+		$object = array(
+			'name' => $this->input->post('name'),
+		);
+
+			// return $object;
+
+		$this->db->insert('categories', $object);
+		$this->session->set_flashdata('message', "Kategori telah di tambahakan !");
+	}
+
+
+	public function updateUser($param = 0)
+	{
+		$user = $this->getUser($param);
+
+		$object = array(
+			'fullname' => $this->input->post('fullname'),
+			'kota' => $this->input->post('kota'),
+			'kode_pos' => $this->input->post('kode_pos'),
+			'alamat' => $this->input->post('alamat'),
+			'mobile' => $this->input->post('mobile'),
+			'username' => $this->input->post('username'),
+			'email' => $this->input->post('email'),
+			'role' => $this->input->post('role'),
+			
+
+
+		);
+
+		$this->db->update('users', $object, array('userId' => $param));
+		$this->session->set_flashdata('message', "Perubahan berhasil disimpan");
+	}
 
 
 

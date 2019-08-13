@@ -7,16 +7,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
    <?php $this->load->view('include/header_seller', $this->data); ?>
    <?php elseif ($this->session->userdata("role")=="Penyewa") : ?>
     <?php $this->load->view('include/header_buyer', $this->data); ?>
-    <?php endif; ?>
+  <?php endif; ?>
 
-    
-<?php $id = $this->session->userdata('userId');
-$this->db->select('*')
-->FROM('users')
-->where('userId',$id);
-$query = $this->db->get()->result();
-foreach ($query as $q) : ?>
 
+  <?php $id = $this->session->userdata('userId');
+  $this->db->select('*')
+  ->FROM('users')
+  ->where('userId',$id);
+  $query = $this->db->get()->result();
+  foreach ($query as $q) : ?>
 
 
 
@@ -207,7 +206,7 @@ foreach ($query as $q) : ?>
   <div class="modal-dialog">
    <div class="modal-content">
     <div class="modal-header">
-     <h3 class="modal-title" id="myModalLabel">Upload Foto SIUP</h3>
+     <h3 class="modal-title" id="myModalLabel">Change Password</h3>
      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
    </div>
    <form class="form-horizontal" action="<?php echo base_url('user/UpadateFotoSiup/'.$q->userId  ) ?>" method="post" enctype="multipart/form-data">
@@ -215,29 +214,40 @@ foreach ($query as $q) : ?>
 
       <div class="form-group">
        <div class="row">
-        <div class="form-group row mb-4">
-          <label class="col-form-label text-md-right col-6 col-md-12 col-lg-3">Password Lama :</label>
-          <div class="col-sm-12 col-md-12">
-            <input type="text"  name="username" class="form-control" placeholder="Isi dengan Password Sekarang" >
-          </div>
+
+        <div class="input-group mb-3">
+         <div class="input-group-prepend">
+          <span class="input-group-text">Password Old</span>
         </div>
-
-
-        <div class="form-group row mb-4">
-          <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Password Baru :</label>
-          <div class="col-sm-12 col-md-7">
-            <input type="text"  name="username" class="form-control"  placeholder="Isi dengan Password Baru" >
-          </div>
-        </div>
-
+        <input type="password" class="form-control" name="password_old" value="<?php echo set_value('password') ?>" placeholder="Password Lama">
+        <p class="help-block"><?php  echo form_error('password', '<small class="text-red">', '</small>'); ?></p>
       </div>
+
+      <hr>
+
+      <div class="input-group mb-3">
+       <div class="input-group-prepend">
+        <span class="input-group-text">Password New</span>
+      </div>
+      <input type="password" class="form-control" name="password_new" value="<?php echo set_value('password') ?>" placeholder="Password Baru">
+      <p class="help-block"><?php  echo form_error('password', '<small class="text-red">', '</small>'); ?></p>
     </div>
 
+    <div class="input-group mb-3">
+     <div class="input-group-prepend">
+      <span class="input-group-text">Re-Password</span>
+    </div>
+    <input type="password" class="form-control" name="retype_password_new" value="<?php echo set_value('retype_password') ?>" placeholder="Retype Password Baru">
+    <p class="help-block"><?php  echo form_error('password', '<small class="text-red">', '</small>'); ?></p>
   </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
-    <button type="submit" class="btn btn-info"><i class="fa fa-save"></i>Upload</button>
-  </div>
+</div>
+</div>
+
+</div>
+<div class="modal-footer">
+  <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+  <button type="submit" class="btn btn-info"><i class="fa fa-save"></i>Change Password</button>
+</div>
 </form>
 </div>
 </div>
@@ -248,99 +258,107 @@ foreach ($query as $q) : ?>
 
 
 
+
 <!-- Main Content -->
 <div class="main-content">
   <section class="section">
     <div class="section-header">
       <div class="section-header-back">
-        <a href="<?php echo base_url() ?>admin/portfolio" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+        <?php if ($this->session->userdata("role")=="Admin") : ?>
+         <a href="<?php echo base_url() ?>Admin" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+         <?php elseif ($this->session->userdata("role")=="Pemilik Media") : ?>
+          <a href="<?php echo base_url() ?>Seller" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+          <?php elseif ($this->session->userdata("role")=="Penyewa") : ?>
+            <a href="<?php echo base_url() ?>Buyer" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+          <?php endif; ?>
+
+        </div>
+        <h1>Atas Nama :  "<?php  echo $q->fullname ?>"</h1>
+
       </div>
-      <h1>Atas Nama :  "<?php  echo $q->fullname ?>"</h1>
-
-    </div>
-    <div class="section-body">
-      <!-- <form class="form-horizontal" action="<?php //echo current_url(); ?>" method="post" enctype="multipart/form-data"> -->
-        <form action="<?php echo base_url('user/updateuser1/'.$q->userId  ) ?>" enctype="multipart/form-data" method="post">
+      <div class="section-body">
+        <!-- <form class="form-horizontal" action="<?php //echo current_url(); ?>" method="post" enctype="multipart/form-data"> -->
+          <form action="<?php echo base_url('user/updateuser1/'.$q->userId  ) ?>" enctype="multipart/form-data" method="post">
 
 
-          <div class="row">
-            <div class="col-md-6">
-              <div class="card">
-                <div class="card-body">
-                 <div class="card-header">
-                  <h4>Data Diri  
-                    <small class="form-text text-muted">Data detail Users penyewa</small></h4>
-                  </div>
-                  <br>
-
-                  <div class="form-group row mb-4">
-                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Username :</label>
-                    <div class="col-sm-12 col-md-7">
-                      <input type="text"  name="username" class="form-control" value="<?php echo $q->username ?>" placeholder="Isi dengan username anda" >
-                      <p class="help-block"><?php  echo form_error('name', '<small class="text-red">', '</small>'); ?></p>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-body">
+                   <div class="card-header">
+                    <h4>Data Diri  
+                      <small class="form-text text-muted">Data detail Users penyewa</small></h4>
                     </div>
-                  </div>
+                    <br>
 
-                  <div class="form-group row mb-4">
-                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Password :</label>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Username :</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text"  name="username" class="form-control" value="<?php echo $q->username ?>" placeholder="Isi dengan username anda" >
+                        <p class="help-block"><?php  echo form_error('name', '<small class="text-red">', '</small>'); ?></p>
+                      </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Password :</label>
+                      <div class="col-sm-12 col-md-7">
+                       <a class="menu-btn" data-toggle="modal" data-target="#change_password" href="#"><i class="fa fa-user-circle"></i>Change Password .. </a>
+                     </div>
+                   </div>
+
+
+                   <div class="form-group row mb-4">
+                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Fullname</label>
                     <div class="col-sm-12 col-md-7">
-                     <a class="menu-btn" data-toggle="modal" data-target="#change_password" href="#"><i class="fa fa-user-circle"></i>Change Password .. </a>
+                     <input type="text" name="fullname" class="form-control" value="<?php echo $q->fullname ?>" placeholder="">
+                     <p class="help-block"><?php  echo form_error('fullname', '<small class="text-red">', '</small>'); ?></p>
                    </div>
                  </div>
 
-
                  <div class="form-group row mb-4">
-                  <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Fullname</label>
+                  <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
                   <div class="col-sm-12 col-md-7">
-                   <input type="text" name="fullname" class="form-control" value="<?php echo $q->fullname ?>" placeholder="">
-                   <p class="help-block"><?php  echo form_error('fullname', '<small class="text-red">', '</small>'); ?></p>
+                   <input type="text" name="email" class="form-control" value="<?php echo $q->email ?>" placeholder="">
+                   <p class="help-block"><?php  echo form_error('email', '<small class="text-red">', '</small>'); ?></p>
                  </div>
                </div>
 
                <div class="form-group row mb-4">
-                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Mobile</label>
                 <div class="col-sm-12 col-md-7">
-                 <input type="text" name="email" class="form-control" value="<?php echo $q->email ?>" placeholder="">
-                 <p class="help-block"><?php  echo form_error('email', '<small class="text-red">', '</small>'); ?></p>
+                 <input type="text" name="mobile" class="form-control" value="<?php echo $q->mobile ?>" placeholder="">
+                 <p class="help-block"><?php  echo form_error('mobile', '<small class="text-red">', '</small>'); ?></p>
                </div>
              </div>
 
+
              <div class="form-group row mb-4">
-              <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Mobile</label>
+              <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kota</label>
               <div class="col-sm-12 col-md-7">
-               <input type="text" name="mobile" class="form-control" value="<?php echo $q->mobile ?>" placeholder="">
-               <p class="help-block"><?php  echo form_error('mobile', '<small class="text-red">', '</small>'); ?></p>
+               <input type="text" name="kota" class="form-control" value="<?php echo $q->kota ?>" placeholder="">
+               <p class="help-block"><?php  echo form_error('kota', '<small class="text-red">', '</small>'); ?></p>
              </div>
            </div>
 
-
            <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kota</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kode POS</label>
             <div class="col-sm-12 col-md-7">
-             <input type="text" name="kota" class="form-control" value="<?php echo $q->kota ?>" placeholder="">
-             <p class="help-block"><?php  echo form_error('kota', '<small class="text-red">', '</small>'); ?></p>
+             <input type="text" name="kode_pos" class="form-control" value="<?php echo $q->kode_pos ?>" placeholder="">
+             <p class="help-block"><?php  echo form_error('kode_pos', '<small class="text-red">', '</small>'); ?></p>
            </div>
          </div>
 
          <div class="form-group row mb-4">
-          <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kode POS</label>
+          <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alamat</label>
           <div class="col-sm-12 col-md-7">
-           <input type="text" name="kode_pos" class="form-control" value="<?php echo $q->kode_pos ?>" placeholder="">
-           <p class="help-block"><?php  echo form_error('kode_pos', '<small class="text-red">', '</small>'); ?></p>
+           <textarea rows="10"  name="alamat" class="form-control"> <?php echo $q->alamat ?> </textarea>
+           <p class="help-block"><?php  echo form_error('alamat', '<small class="text-red">', '</small>'); ?></p>
          </div>
        </div>
 
-       <div class="form-group row mb-4">
-        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alamat</label>
-        <div class="col-sm-12 col-md-7">
-         <textarea rows="10"  name="alamat" class="form-control"> <?php echo $q->alamat ?> </textarea>
-         <p class="help-block"><?php  echo form_error('alamat', '<small class="text-red">', '</small>'); ?></p>
-       </div>
-     </div>
-
-   </form>
+     </form>
+   </div>
  </div>
-</div>
 </div>
 
 
@@ -426,7 +444,10 @@ foreach ($query as $q) : ?>
 </div>
 </div>
 </section>
+
 </div>
+
+
 
 
 

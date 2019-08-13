@@ -28,15 +28,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          <p class="section-lead">Data Pemesanan, hanya dapat dilihat oleh Admin, mohon di lihat datanya dan <b>Accept</b> jika <i>Pembayaran</i> telah selesai.
           <hr>
 
-           <?php if ($this->session->userdata("role")=="Admin") : ?>
-             <a  onclick="window.open('<?php echo base_url('admin/printOrderById/'.$q->userId); ?>','Cetak Data Reklame','width=650, height=800','size:landscape').print()"  href="#" class="btn btn-info" target="_blank"/><i class="fa fa-print" style="color:red"> </i> Print All By ID </a>
-              || 
-             <a  onclick="window.open('<?php echo base_url('admin/printOrderAll'); ?>','Cetak Data Reklame','width=650, height=800','size:landscape').print()"  href="#" class="btn btn-info" target="_blank"/><i class="fa fa-print" style="color:red"> </i> Print All Order </a>
-             <br>
-             <?php elseif ($this->session->userdata("role")=="Penyewa") : ?>
-              <?php elseif ($this->session->userdata("role")=="Pemilik Media") : ?>
-              <?php endif; ?>
-          <?php endforeach; ?>
+          <?php if ($this->session->userdata("role")=="Admin") : ?>
+           <a  onclick="window.open('<?php echo base_url('admin/printOrderById/'.$q->userId); ?>','Cetak Data Reklame','width=650, height=800','size:landscape').print()"  href="#" class="btn btn-info" target="_blank"/><i class="fa fa-print" style="color:red"> </i> Print All By ID </a>
+           || 
+           <a  onclick="window.open('<?php echo base_url('admin/printOrderAll'); ?>','Cetak Data Reklame','width=650, height=800','size:landscape').print()"  href="#" class="btn btn-info" target="_blank"/><i class="fa fa-print" style="color:red"> </i> Print All Order </a>
+           <br>
+           <?php elseif ($this->session->userdata("role")=="Penyewa") : ?>
+            <?php elseif ($this->session->userdata("role")=="Pemilik Media") : ?>
+            <?php endif; ?>
+       
 
           <div class="row">
             <div class="col-12">
@@ -51,18 +51,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <th class="text-center">Deskripsi</th>
                         <th class="text-center">Photo</th>
                         <th class="text-center">Status</th>
-                        <th class="text-center">Tools</th>
-                      </tr>
-                    </thead>
-                    <tbody>
+
+                        <?php if ($this->session->userdata("role")=="Admin") : ?>
+                         <th class="text-center">Tools</th>
+                         <?php elseif ($this->session->userdata("role")=="Penyewa") : ?>
+                          <?php elseif ($this->session->userdata("role")=="Pemilik Media") : ?>
+                         <?php endif; ?>
+
+                       </tr>
+                     </thead>
+                     <tbody>
                       <?php foreach( $order as $row) : ?>
                         <tr>
                           <td><?php echo ++$this->page ?>.</td>
                           <td >
                             <?php echo $row->no_invoice ?>
-                            <a href="<?php echo base_url('admin/updateorder/'.$row->no_invoice); ?>"><i class="fas fa-eye">Lihat</i></a>
-                            <hr>
+                            
                             <?php if ($this->session->userdata("role")=="Admin") : ?>
+                              <a href="<?php echo base_url('admin/updateorder/'.$row->no_invoice); ?>"><i class="fas fa-eye">Lihat</i></a>
+                            <hr>
                               <br>
                               <a  onclick="window.open('<?php echo base_url('admin/printOrder/'.$row->no_invoice); ?>','Cetak Data Order','width=1080, height=800','size:landscape').print()"  href="#" class="btn btn-info" target="_blank"/><i class="fa fa-print" style="color:red"> </i>Print</a>
                               <?php elseif ($this->session->userdata("role")=="Penyewa") : ?>
@@ -89,38 +96,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <p> Done </p>
                                   <?php endif; ?>
                                 </td>
-                                <td class="td-action"> 
-                                  <div class="button-action">
+                                <?php if ($this->session->userdata("role")=="Admin") : ?>
+                                  <td class="td-action"> 
+                                    <div class="button-action">
+                                      <?php if($row->status_order == "0") : ?>
+                                       <a  href="#" onclick="acceptOrder('<?php echo $row->no_invoice ?>')"  style="color: green">
+                                        <i class="fas fa-check">Accept</i></a>
+                                        <?php else : ?>
+                                          <a  href="#" onclick="declineOrder('<?php echo $row->no_invoice ?>')" style="color: red" >
+                                           <i class="fas fa-exclamation">Decline</i></a> 
+                                         <?php endif; ?>
 
+                                         |
 
-                                    <?php if($row->status_order == "0") : ?>
-                                     <a  href="#" onclick="acceptOrder('<?php echo $row->no_invoice ?>')"  style="color: green">
-                                      <i class="fas fa-check">Accept</i></a>
-                                      <?php else : ?>
-                                        <a  href="#" onclick="declineOrder('<?php echo $row->no_invoice ?>')" style="color: red" >
-                                         <i class="fas fa-exclamation">Decline</i></a> 
-                                       <?php endif; ?>
+                                         <a href="<?php echo base_url('admin/updateorder/'.$row->no_invoice); ?>"><i class="fas fa-edit">Edit</i></a> 
+                                         <a  href="#" onclick="hapus_order('<?php echo $row->no_invoice ?>')" class="text-danger"><i class="fas fa-trash">Hapus</i></a>
+                                       </div>  
+                                     </td>
+                                     <?php elseif ($this->session->userdata("role")=="Penyewa") : ?>
 
-                                       |
+                                      <?php elseif ($this->session->userdata("role")=="Pemilik Media") : ?>
 
-                                       <a href="<?php echo base_url('admin/updateorder/'.$row->no_invoice); ?>"><i class="fas fa-edit">Edit</i></a> 
-                                       <a  href="#" onclick="hapus_order('<?php echo $row->no_invoice ?>')" class="text-danger"><i class="fas fa-trash">Hapus</i></a>
-                                     </div>  
-                                   </td>
-                                 </tr>
-                               <?php endforeach; ?>
-                             </tbody>
-                           </table>
+                                     <?php endif; ?>
+
+                                   </tr>
+                                 <?php endforeach; ?>
+                                    <?php endforeach; ?>
+                               </tbody>
+                             </table>
+                           </div>
                          </div>
                        </div>
                      </div>
                    </div>
-                 </div>
 
 
-                 <?php
-                 $this->load->view('include/footer', $this->data);
+                   <?php
+                   $this->load->view('include/footer', $this->data);
 
 
-                 /* End of file data-order.php */
+                   /* End of file data-order.php */
 /* Location: ./application/views/admin/data-order.php */

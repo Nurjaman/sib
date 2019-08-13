@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="section-body">
          <h2 class="section-title">Sistem Informasi Billboard</h2>
 
-         <p class="section-lead">Isi data perusahaan bila Anda mewakili sebuah perusahaan atau isi dengan nama Anda bila <i>tidak mewakili perusahaan</i>.
+         <p class="section-lead">Dimohon untuk mengisi Data Reklame dengan sedetail, agar<i>Customers</i>, mempermudah mengenali Reklame anda !
           <hr>
           <?php if ($this->session->userdata("role")=="Admin") : ?>
            <a  onclick="window.open('<?php echo base_url('admin/printReklameById/'.$q->userId); ?>','Cetak Data Reklame','width=650, height=800','size:landscape').print()"  href="#" class="btn btn-info" target="_blank"/><i class="fa fa-print" style="color:red"> </i> Print All By ID </a>

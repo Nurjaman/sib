@@ -311,7 +311,7 @@ class M_User extends CI_Model
 		
 		$object = array(
 			'role' => $this->input->post('role'),
-			'username' => $this->input->post('username'),
+			'fullname' => $this->input->post('fullname'),
 			'mobile' => $this->input->post('mobile'),
 			'email' => $this->input->post('email'),
 			'password' => password_hash($this->input->post('password'),PASSWORD_DEFAULT),

@@ -75,7 +75,7 @@
                <?php endif; ?>
 
 
-               <div class="d-sm  -none d-lg-inline-block">Hi,<?php  echo $q->fullname; ?>
+               <div class="d-sm -none d-lg-inline-block">Hi,<?php  echo $q->fullname; ?>
              </div></a>
              <div class="dropdown-menu dropdown-menu-right">
 
@@ -104,6 +104,7 @@
             <li class="<?php echo active_link_method('index', 'user') ?>">
               <a href="<?php echo base_url('admin') ?>" class="nav-link  "><i class="fas fa-fire"></i><span>SELLER</span></a>
             </li>
+            
             <li class="menu-header">Tambah Data</li>
             <li class="<?php echo active_link_method('addreklame', 'admin') ?>">
               <a href="<?php echo base_url('admin/addreklame') ?>" class="nav-link  "><i class="fas fa-plus"></i><span>Tambah Reklame</span></a>

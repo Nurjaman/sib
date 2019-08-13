@@ -237,7 +237,7 @@
                       foreach ($query->result() as $id_perusahaan => $row) 
                       {
                                         # code...
-                        echo '<option value="'.$row->id_perusahaan.'">'.$row->nm_perusahaan.'</option>';
+                        echo '<option name="'.$row->id_perusahaan.'" value="'.$row->id_perusahaan.'">'.$row->nm_perusahaan.'</option>';
                       }
                       ?>
 

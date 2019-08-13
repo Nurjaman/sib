@@ -81,9 +81,9 @@
       <div class="form-group">
        <div class="row">
         <div class="col-md-6">
-          <small id="emailHelp" class="form-text text-muted">Username :</small>
-          <input name="username" value="<?php echo set_value('username') ?>"  placeholder="Username" class="form-control" >
-          <p class="help-block"><?php  echo form_error('username', '<small class="text-red">', '</small>'); ?></p>
+          <small id="emailHelp" class="form-text text-muted">Fullname :</small>
+          <input name="fullname" value="<?php echo set_value('fullname') ?>"  placeholder="Fullname" class="form-control" >
+          <p class="help-block"><?php  echo form_error('fullname', '<small class="text-red">', '</small>'); ?></p>
         </div><div class="col-md-6">
           <small id="emailHelp" class="form-text text-muted">Sebagai :</small>
           <select name="role"  value="<?php echo set_value('role') ?>" id="input" class="form-control">
@@ -117,6 +117,14 @@
   <span class="input-group-text">Password</span>
 </div>
 <input type="password" class="form-control" name="password" value="<?php echo set_value('password') ?>" placeholder="Password">
+<p class="help-block"><?php  echo form_error('password', '<small class="text-red">', '</small>'); ?></p>
+</div>
+
+<div class="input-group mb-3">
+ <div class="input-group-prepend">
+  <span class="input-group-text">Re-Password</span>
+</div>
+<input type="password" class="form-control" name="retype_password" value="<?php echo set_value('retype_password') ?>" placeholder="Retype Password">
 <p class="help-block"><?php  echo form_error('password', '<small class="text-red">', '</small>'); ?></p>
 </div>
 
@@ -210,7 +218,7 @@
      <form action="" method="get" style="margin:10px;">
       <div class="control-group form-group">
        <div class="controls">
-        <label>Kata Kunci :</label>
+        <label>Kata Kunci Alamat :</label>
         <input type="text" name="q" value="<?php echo $this->input->get('q') ?>" class="form-control" id="place-input">
       </div>
     </div>

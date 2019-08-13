@@ -64,32 +64,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <td>
                               <?php if ($this->session->userdata("role")=="Admin") : ?>
                                 <a href="https://api.whatsapp.com/send?phone=<?php  echo $row->mobile_perusahaan ?>&text=Halo, saya dari Admin SIB."> <p class="fab fa-whatsapp"><?php  echo $row->mobile_perusahaan ?></a>
-                                <?php else: ?>
-                                  <?php  echo $row->mobile_perusahaan ?>
-                                <?php endif; ?>
+                                  <?php else: ?>
+                                    <?php  echo $row->mobile_perusahaan ?>
+                                  <?php endif; ?>
                                 </td>
-                                  <td> <?php echo $row->alamat_perusahaan ?> </td>
+                                <td> <?php echo $row->alamat_perusahaan ?> </td>
 
-                                  <td class="td-action"> 
-                                    <div class="button-action">
-                                     <a href="<?php echo base_url('reklame/updateperusahaan/'.$row->id_perusahaan); ?>"><i class="fas fa-edit">Edit</i></a> 
+                                <td class="td-action"> 
+                                  <div class="button-action">
+                                    <?php if ($this->session->userdata("role")=="Admin") : ?>
                                      <a  href="#" onclick="hapus_perusahaan('<?php echo $row->id_perusahaan ?>')" class="text-danger"><i class="fas fa-trash">Hapus</i></a>
-                                   </div>  
-                                 </td>
-                               </tr>
-                             <?php endforeach; ?>
-                           </tbody>
-                         </table>
-                       </div>
-                     </div>
-                   </div>
-                 </div>
-               </div>
+                                    <?php endif; ?>
+                                    <a href="<?php echo base_url('reklame/updateperusahaan/'.$row->id_perusahaan); ?>"><i class="fas fa-edit">Edit</i></a> 
+
+                                  </div>  
+                                </td>
+                              </tr>
+                            <?php endforeach; ?>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 
-               <?php
-               $this->load->view('include/footer', $this->data);
+              <?php
+              $this->load->view('include/footer', $this->data);
 
 
-               /* End of file data-order.php */
+              /* End of file data-order.php */
 /* Location: ./application/views/admin/data-order.php */

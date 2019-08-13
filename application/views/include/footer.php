@@ -190,6 +190,23 @@
       });
   }
 
+     function hapus_kategori(category_id){
+      swal({
+        title: "Hapus Kategori ? ",
+        text: "Jika iya, Data akan hilang !",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          window.location.href = "<?php echo base_url() ?>admin/deletekategory/"+category_id;
+        } else {
+          swal("Anda tidak jadi menghapus data ini ..");
+        }
+      });
+  }
+
 
    function hapus_perusahaan(id_perusahaan){
       swal({
@@ -204,6 +221,23 @@
           window.location.href = "<?php echo base_url() ?>reklame/deleteperusahaan/"+id_perusahaan;
         } else {
           swal("Anda tidak jadi menghapus data ini ..");
+        }
+      });
+  }
+
+  function hapus_user(userId){
+      swal({
+        title: "Hapus User ? ",
+        text: "Apakah yakin, Data User yang dipilih akan di hapus ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          window.location.href = "<?php echo base_url() ?>user/deleteUser/"+userId;
+        } else {
+          swal("Anda tidak jadi menghapus Users ini!");
         }
       });
   }

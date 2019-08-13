@@ -77,7 +77,7 @@
                ?></div></a>
                <div class="dropdown-menu dropdown-menu-right">
 
-                <a href="<?php echo base_url('user/updateUser/'.$q->userId  ) ?>" class="dropdown-item has-icon">
+                <a href="<?php echo base_url('user/updateuser1/'.$q->userId ) ?>" class="dropdown-item has-icon">
                   <i class="fas fa-cog"></i> Settings
                 </a>
                 <div class="dropdown-divider"></div>
@@ -103,9 +103,6 @@
                 <a href="<?php echo base_url('admin') ?>" class="nav-link  "><i class="fas fa-fire"></i><span>Buyyer</span></a>
               </li>
               <li class="menu-header">Tambah Data</li>
-              <li class="<?php echo active_link_method('addreklame', 'admin') ?>">
-                <a href="<?php echo base_url('admin/addreklame') ?>" class="nav-link  "><i class="fas fa-plus"></i><span>Tambah Reklame</span></a>
-              </li>
               <li class="<?php echo active_link_method('addperusahaan', 'user') ?>">
                 <a href="<?php echo base_url('user/addPerusahaan') ?>" class="nav-link  "><i class="fas fa-plus"></i><span>Tambah Perusahaan</span></a>
               </li>

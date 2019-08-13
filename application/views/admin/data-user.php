@@ -62,6 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <td >
                               <?php echo $row->email ?>
                               <?php if ($this->session->userdata("role")=="Admin") : ?>
+                                 <a href="<?php echo base_url('admin/updateuser/'.$row->userId); ?>"><i class="fas fa-eye">Lihat</i></a>
                                 <br>
                                 <a  onclick="window.open('<?php echo base_url('admin/printUser/'.$row->userId); ?>','Cetak Data Order','width=1080, height=800','size:landscape').print()"  href="#" class="btn btn-info" target="_blank"/><i class="fa fa-print" style="color:red"> </i>Print</a>
                                 <?php elseif ($this->session->userdata("role")=="Penyewa") : ?>
@@ -101,8 +102,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                            |
 
-                                           <a href="<?php echo base_url('admin/updateorder/'.$row->userId); ?>"><i class="fas fa-edit">Edit</i></a> 
-                                           <a  href="#" onclick="hapus_order('<?php echo $row->userId ?>')" class="text-danger"><i class="fas fa-trash">Hapus</i></a>
+                                           <a href="<?php echo base_url('user/updateuser1/'.$row->userId); ?>"><i class="fas fa-edit">Edit</i></a>
+                                            
+                                           <a  href="#" onclick="hapus_user('<?php echo $row->userId ?>')" class="text-danger"><i class="fas fa-trash">Hapus</i></a>
                                          </div>  
                                        </td>
                                      </tr>

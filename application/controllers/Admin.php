@@ -222,6 +222,23 @@ class Admin extends CI_Controller
 		$this->load->view('admin/update-reklame', $this->data);
 	}
 
+	public function deletekategory($param = 0)
+	{
+		$this->madmin->deletekategory($param);
+
+		$this->session->set_flashdata('pesan',"	
+			<script type='text/javascript'>
+			swal({
+				title: 'Sukses',
+				text: 'Kategory telah dihapus ! ',
+				icon: 'success',
+				confirmButtonText: 'OK'
+				})
+				</script>");
+
+		redirect('admin/kategorireklame');
+	}
+
 	public function deletereklame($param = 0)
 	{
 		$this->madmin->deleteReklame($param);
@@ -441,6 +458,29 @@ class Admin extends CI_Controller
 		$this->load->view('admin/detail-order1', $this->data);
 	}
 
+	
+	
+	public function updateUser($param)
+	{
+		$this->data = array(
+			'title' => "Pengaturan Akun"
+		);	
+
+		$this->form_validation->set_rules('username', 'Username', 'trim|required');
+		$this->form_validation->set_rules('email', 'E-Mail', 'trim|valid_email|required');
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->madmin->updateUser($param);
+			// echo $object;
+
+			redirect(current_url());
+		}
+
+		$this->data['user'] = $this->madmin->getUser($param);
+		$this->load->view('account', $this->data);
+	}
+
 	/* ------------------------------------------
 	------------- End Order ------------------*/
 
@@ -490,7 +530,7 @@ class Admin extends CI_Controller
 
 	public function addUser()
 	{	
-		$this->data['title'] = "Tambah Order";
+		$this->data['title'] = "Tambah User";
 
 		$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required');
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
@@ -609,7 +649,7 @@ class Admin extends CI_Controller
 	// Print User
 	// =================================
 
-		public function printUser($id)
+	public function printUser($id)
 	{
 		$where = array('userId'=> $id);
 		$data['reklame'] = $this->madmin->printReklame($where,'users')->result();
@@ -626,7 +666,61 @@ class Admin extends CI_Controller
 
 		$this->load->view('cetak/cetakuser.php',$data);
 	}
+	public function kategorireklame()
+	{
+		$config['base_url'] = site_url("admin/kategorireklame?per_page={$this->input->get('per_page')}&query={$this->input->get('q')}");
 
+		$config['per_page'] = 10;
+		$config['total_rows'] = $this->madmin->getAllkategori(null, null, 'num');
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = "&larr; Pertama";
+		$config['first_tag_open'] = '<li class="">';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = "Terakhir &raquo";
+		$config['last_tag_open'] = '<li class="">';
+		$config['last_tag_close'] = '</li>';
+		$config['next_link'] = "Selanjutnya &rarr;";
+		$config['next_tag_open'] = '<li class="">';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_link'] = "&larr; Sebelumnya"; 
+		$config['prev_tag_open'] = '<li class="">';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a href="">';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li class="">';
+		$config['num_tag_close'] = '</li>'; 
+		$config['page_query_string'] = TRUE;
+		$config['query_string_segment'] = 'page';
+		
+		$this->pagination->initialize($config);
+		
+		
+
+		$this->data = array(
+			'title' => "Data Kategori Reklame",
+			'kategori' => $this->madmin->getAllkategori($config['per_page'], $this->input->get('page'), 'result')
+		);
+
+		$this->load->view('admin/data-kategori', $this->data);
+	}
+
+	public function addKategori()
+	{	
+		$this->data['title'] = "Tambah Kategori";
+
+		$this->form_validation->set_rules('name', 'Nama', 'trim|required');
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->madmin->createkategori();
+
+			redirect(current_url());
+		}
+
+		$this->load->view('admin/add-kategori', $this->data);
+
+	}
 
 
 
