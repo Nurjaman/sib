@@ -187,8 +187,6 @@ class User extends CI_Controller
 			// echo $object;
 
 			redirect(current_url());
-		}else{
-			echo "Erro1";
 		}
 
 		  //active record dengan nama edi
@@ -506,10 +504,39 @@ class User extends CI_Controller
 				text: 'Users ini telah dihapus ! ',
 				icon: 'success',
 				confirmButtonText: 'OK'
-				})
+				}) 
 				</script>");
 
 		redirect('admin/user');
+	}
+
+	//change password
+		public function changePassword($param)
+	{
+		$this->data = array(
+			'title' => "Pengaturan Akun",
+			'user' => $this->M_User->getRegister()
+		);	
+
+		
+		$this->form_validation->set_rules('new_password', 'Password', 'required|min_length[6]|matches[retype_password]');
+		$this->form_validation->set_rules('retype_password', 'Retype Password', 'required|min_length[6]|matches[new_password]');
+
+		//$this->form_validation->set_rules('old_pass', 'Password Lama', 'trim|required|callback_validate_password');
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->M_User->changePassword($param);
+			// echo $object;
+
+			redirect(current_url());
+		}
+
+		  //active record dengan nama edi
+		$where = array('userId' => $param);
+
+		$this->data['user'] = $this->Madmin->getAllUser($where,'users');
+		$this->load->view('account1', $this->data);
 	}
 
 

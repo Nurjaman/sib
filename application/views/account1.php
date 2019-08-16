@@ -16,6 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   ->where('userId',$id);
   $query = $this->db->get()->result();
   foreach ($query as $q) : ?>
+    <body id="page-top">
 
 
 
@@ -23,48 +24,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
+      <!-- =========== M O D A L | U P L O A D ============ -->
 
-    <!-- =========== M O D A L | U P L O A D ============ -->
-
-    <!-- UPLOAD PROFILE -->
-    <div class="modal fade" id="upload_profile" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
-      <div class="modal-dialog">
-       <div class="modal-content">
-        <div class="modal-header">
-         <h3 class="modal-title" id="myModalLabel">Upload Foto Profile</h3>
-         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-       </div>
-       <form class="form-horizontal" action="<?php echo base_url('user/UpadateFotoUser/'.$q->userId  ) ?>" method="post" enctype="multipart/form-data">
-         <div class="modal-body">
-
-          <div class="form-group">
-           <div class="row">
-
-            <div class="form-group row mb-4">
-              <div class="col-md-4">
-                <?php if($q->photo_profile != '') : ?>
-                 <a class="example-image-link" href="<?php echo base_url("public/image/foto_user/{$q->photo_profile}") ?>" data-lightbox="example-set" data-title="Foto User"><img  alt="Bootstrap template" src="<?php echo base_url("public/image/foto_user/{$q->photo_profile}") ?>" height="250" width="450" /> </a>
-                 <hr>
-                 <input type="file" name="photo_profile">
-
-                 <?php else : ?>
-                  <input type="file" name="photo_profile">
-
-                <?php endif; ?>
-              </div>
-            </div>
-
+      <!-- UPLOAD PROFILE -->
+      
+      <div class="modal fade" id="upload_profile" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true" aria-labelledby="exampleModalLabel">
+       <div class="modal-dialog" role="document">
+         <div class="modal-content">
+          <div class="modal-header">
+           <h3 class="modal-title" id="myModalLabel">Upload Foto Profile</h3>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
           </div>
-        </div>
+          <form class="form-horizontal" action="<?php echo base_url('user/UpadateFotoUser/'.$q->userId  ) ?>" method="post" enctype="multipart/form-data">
+           <div class="modal-body">
 
-      </div>
-      <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
-        <button type="submit" class="btn btn-info"><i class="fa fa-save"></i>Upload</button>
-      </div>
-    </form>
+            <div class="form-group">
+             <div class="row">
+
+              <div class="form-group row mb-4">
+                <div class="col-md-4">
+                  <?php if($q->photo_profile != '') : ?>
+                   <a class="example-image-link" href="<?php echo base_url("public/image/foto_user/{$q->photo_profile}") ?>" data-lightbox="example-set" data-title="Foto User"><img  alt="Bootstrap template" src="<?php echo base_url("public/image/foto_user/{$q->photo_profile}") ?>" height="250" width="450" /> </a>
+                   <hr>
+                   <input type="file" name="photo_profile">
+
+                   <?php else : ?>
+                    <input type="file" name="photo_profile">
+
+                  <?php endif; ?>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+          <button type="submit" class="btn btn-info"><i class="fa fa-save"></i>Upload</button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
 </div>
 <!-- End Upload Profile -->
 
@@ -209,7 +211,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
      <h3 class="modal-title" id="myModalLabel">Change Password</h3>
      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
    </div>
-   <form class="form-horizontal" action="<?php echo base_url('user/UpadateFotoSiup/'.$q->userId  ) ?>" method="post" enctype="multipart/form-data">
+   <form class="form-horizontal" action="<?php echo base_url('user/changePassword/'.$q->userId  ) ?>" method="post" enctype="multipart/form-data">
      <div class="modal-body">
 
       <div class="form-group">
@@ -217,30 +219,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         <div class="input-group mb-3">
          <div class="input-group-prepend">
-          <span class="input-group-text">Password Old</span>
+          <span class="input-group-text">Password New</span>
         </div>
-        <input type="password" class="form-control" name="password_old" value="<?php echo set_value('password') ?>" placeholder="Password Lama">
-        <p class="help-block"><?php  echo form_error('password', '<small class="text-red">', '</small>'); ?></p>
+        <input type="password" class="form-control" name="new_password" value="<?php echo set_value('new_password') ?>" placeholder="Password Baru">
       </div>
-
-      <hr>
+      <p class="help-block"><?php  echo form_error('new_password', '<small class="text-red">', '</small>'); ?></p>
 
       <div class="input-group mb-3">
        <div class="input-group-prepend">
-        <span class="input-group-text">Password New</span>
+        <span class="input-group-text">Re-Password</span>
       </div>
-      <input type="password" class="form-control" name="password_new" value="<?php echo set_value('password') ?>" placeholder="Password Baru">
-      <p class="help-block"><?php  echo form_error('password', '<small class="text-red">', '</small>'); ?></p>
+      <input type="password" class="form-control" name="retype_password" value="<?php echo set_value('retype_password') ?>" placeholder="Retype Password Baru">
     </div>
-
-    <div class="input-group mb-3">
-     <div class="input-group-prepend">
-      <span class="input-group-text">Re-Password</span>
-    </div>
-    <input type="password" class="form-control" name="retype_password_new" value="<?php echo set_value('retype_password') ?>" placeholder="Retype Password Baru">
-    <p class="help-block"><?php  echo form_error('password', '<small class="text-red">', '</small>'); ?></p>
+    <p class="help-block"><?php  echo form_error('retype_password', '<small class="text-red">', '</small>'); ?></p>
   </div>
-</div>
 </div>
 
 </div>
@@ -356,9 +348,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          </div>
        </div>
 
-     </form>
-   </div>
- </div>
+       <hr>
+       <div class="form-group row mb-4">
+        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+        <div class="col-sm-12 col-md-7">
+
+        <!-- <button type="submit" class="btn btn-info btn-block" onclick="updateProfile('<?php //echo $q->userId ?>')"  style="color: green" class="fas fa-check" value="Update">
+          <i class="fas fa-check">Update</i></a> -->
+
+          <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> Update</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
 </div>
 
 
@@ -384,6 +388,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <a class="example-image-link" href="<?php echo base_url("public/image/foto_user/{$q->photo_profile}") ?>" data-lightbox="example-set" data-title="Foto Profile"><img  alt="Bootstrap template" src="<?php echo base_url("public/image/foto_user/{$q->photo_profile}") ?>" height="150" width="250" /> </a>
         <?php else : ?>
          <a class="menu-btn" data-toggle="modal" data-target="#upload_profile" href="#"><i class="fa fa-user-circle"></i>Upload Foto Profile .. </a>
+         <hr>
+         <img src="<?php echo base_url("public/image/no_image.jpg") ?>" height="150" width="250" /> </a>
 
        <?php endif; ?>
      </div>
@@ -398,6 +404,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <a class="example-image-link" href="<?php echo base_url("public/image/foto_npwp/{$q->photo_npwp}") ?>" data-lightbox="example-set" data-title="Foto NPWP"><img  alt="Bootstrap template" src="<?php echo base_url("public/image/foto_npwp/{$q->photo_npwp}") ?>" height="150" width="250" /> </a>
       <?php else : ?>
        <a class="menu-btn" data-toggle="modal" data-target="#upload_npwp" href="#"><i class="fa fa-user-circle"></i>Upload Foto NPWP .. </a>
+       <hr>
+       <img src="<?php echo base_url("public/image/no_image.jpg") ?>" height="150" width="250" /> </a>
      <?php endif; ?>
    </div>
  </div>
@@ -411,6 +419,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
      <a class="example-image-link" href="<?php echo base_url("public/image/foto_sppkp/{$q->photo_sppkp}") ?>" data-lightbox="example-set" data-title="Foto SPPKP"><img  alt="Bootstrap template" src="<?php echo base_url("public/image/foto_sppkp/{$q->photo_sppkp}") ?>" height="150" width="250" /> </a>
      <?php else : ?>
        <a class="menu-btn" data-toggle="modal" data-target="#upload_sppkp" href="#"><i class="fa fa-user-circle"></i>Upload Foto SPPKP .. </a>
+       <hr>
+       <img src="<?php echo base_url("public/image/no_image.jpg") ?>" height="150" width="250" /> </a>
      <?php endif; ?>
    </div>
  </div>
@@ -424,23 +434,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <a class="example-image-link" href="<?php echo base_url("public/image/foto_siup/{$q->photo_siup}") ?>" data-lightbox="example-set" data-title="Foto SIUP"><img  alt="Bootstrap template" src="<?php echo base_url("public/image/foto_siup/{$q->photo_siup}") ?>" height="150" width="250" /> </a>
     <?php else : ?>
       <a class="menu-btn" data-toggle="modal" data-target="#upload_siup" href="#"><i class="fa fa-user-circle"></i>Upload Foto SIUP .. </a>
+      <hr>
+      <img src="<?php echo base_url("public/image/no_image.jpg") ?>" height="150" width="250" /> </a>
     <?php endif; ?>
   </div>
 </div>
 
-<hr>
-<div class="form-group row mb-4">
-  <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-  <div class="col-sm-12 col-md-7">
 
-        <!-- <button type="submit" class="btn btn-info btn-block" onclick="updateProfile('<?php //echo $q->userId ?>')"  style="color: green" class="fas fa-check" value="Update">
-          <i class="fas fa-check">Update</i></a> -->
-
-          <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> Update</button>
-        </div>
-      </div>
-    <?php endforeach; ?>
-  </div>
+<?php endforeach; ?>
+</div>
 </div>
 </div>
 </section>

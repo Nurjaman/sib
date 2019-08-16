@@ -360,6 +360,19 @@ class M_User extends CI_Model
 	}
 
 
+		//change password
+		public function changePassword($param = 0)
+	{		
+		$object = array(
+			'password' => password_hash($this->input->post('new_password'),PASSWORD_DEFAULT),
+		);
+
+		$this->db->update('users', $object, array('userId' => $param));
+		$this->session->set_flashdata('message', "Perubahan berhasil disimpan");
+	}
+
+
+
 
 }
 

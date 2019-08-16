@@ -102,8 +102,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                            |
 
-                                           <a href="<?php echo base_url('user/updateuser1/'.$row->userId); ?>"><i class="fas fa-edit">Edit</i></a>
-                                            
                                            <a  href="#" onclick="hapus_user('<?php echo $row->userId ?>')" class="text-danger"><i class="fas fa-trash">Hapus</i></a>
                                          </div>  
                                        </td>

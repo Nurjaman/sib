@@ -335,6 +335,7 @@
     </button>
   </div>
   <div class="modal-body">
+    <p>Billboard termasuk salah satu model iklan di luar ruang atau outdoor advertising yang paling banyak dipakai untuk promosi suatu produk misalnya smartphone terbaru, atau bisa juga berisikan pengumuman dari pemerintah. Pada perkembangannya billboard semakin maju dengan adanya teknologi sehingga muncul digital billboard. Ada pula mobile billboard yaitu billboard yang berjalan karena dipasang di mobil atau disebut iklan berjalan. Dan sekarang juga sudah ada digital mobile billboard yang merupakan perpaduan antara digital billboard dan mobile billboard, sehingga billboard jenis ini mempunyai gambar yang bisa bergerak (versi digital) dan dapat berjalan.
    <table class="table table-striped">
     <tbody>
      <tr>
